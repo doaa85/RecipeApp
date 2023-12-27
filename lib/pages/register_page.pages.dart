@@ -74,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 100, 8, 0),
+              padding: const EdgeInsets.fromLTRB(8, 120, 8, 0),
               child: Form(
                   key: formkey,
                   child: Column(

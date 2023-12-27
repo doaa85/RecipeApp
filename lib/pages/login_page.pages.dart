@@ -32,16 +32,18 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/Mask Group 9.png'),
-              fit: BoxFit.cover)),
-      child: Expanded(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+        body: Center(
+      child: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/Mask Group 9.png'),
+                    fit: BoxFit.cover)),
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(90, 30, 0, 0),
               child: Container(
                 width: 180,
                 height: 100,
@@ -50,15 +52,20 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Text(
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(155, 120, 0, 0),
+            child: const Text(
               'Sign in',
               style: TextStyle(color: Colors.white),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 90, 8, 0),
+            child: Expanded(
               child: Form(
                   key: formkey,
                   child: Column(
@@ -164,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                           height: 10,
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 220, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 200, 0, 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -196,8 +203,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ])),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     ));
   }
