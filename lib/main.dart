@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:recipe_app/pages/splash_page.dart';
 import 'package:recipe_app/services/preferences.services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   WidgetsFlutterBinding.ensureInitialized();
   try {
     PreferencesServices.prefs = await SharedPreferences.getInstance();
@@ -28,7 +31,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
