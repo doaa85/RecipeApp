@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:recipe_app/pages/enter_page.pages.dart';
 import 'package:recipe_app/pages/home_page.pages.dart';
-import 'package:recipe_app/services/preferences.services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -19,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
 
   void initSplash() async {
     await Future.delayed(const Duration(seconds: 10));
-    if (PreferencesServices.checkUser()) {
+    if (GetIt.I.get<SharedPreferences>().getBool('isLogin') ?? false) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => HomePage()));
     } else {

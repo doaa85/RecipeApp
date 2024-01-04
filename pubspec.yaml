@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: ^2.2.2
   email_validator: ^2.1.17
   flutter_svg: ^2.0.9
+  get_it: ^7.6.4
 
 dev_dependencies:
   flutter_test:

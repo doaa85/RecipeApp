@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:recipe_app/pages/splash_page.dart';
-import 'package:recipe_app/services/preferences.services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -9,12 +9,13 @@ void main() async {
       SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   WidgetsFlutterBinding.ensureInitialized();
   try {
-    PreferencesServices.prefs = await SharedPreferences.getInstance();
+    var preference = await SharedPreferences.getInstance();
+    GetIt.I.registerSingleton<SharedPreferences>(preference);
 
-    if (PreferencesServices.prefs != null) {
-      print(
-          '========================= prefrences init Successfully ========================');
-    }
+    // if (PreferencesServices.prefs != null) {
+    //   print(
+    //       '========================= prefrences init Successfully ========================');
+    // }
   } catch (e) {
     print(
         '=========================Error In init Prefrences ${e}========================');

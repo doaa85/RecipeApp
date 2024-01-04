@@ -9,4 +9,6 @@ class Ad {
   Map<String, dynamic> toJson() {
     return {'title': title, 'image': image};
   }
+
+  static fromJson(Map<String, dynamic> e) {}
 }
