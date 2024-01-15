@@ -39,7 +39,9 @@ dependencies:
   email_validator: ^2.1.17
   flutter_svg: ^2.0.9
   get_it: ^7.6.4
-
+  http: ^0.13.5
+  flutter_bloc: ^8.1.3
+  provider: ^6.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,6 +71,19 @@ flutter:
     - assets/data/
     - assets/icon/Icons/
     - assets/images/
+    - assets/data/sample.json
+    - assets/images/recipe1.png
+    - assets/icon/Icons/serving.png
+    - assets/icon/Icons/filter.png
+    - assets/icon/Icons/notifications.png
+    - assets/icon/Icons/menu.png
+    - assets/images/Cinnamon Toaast copy.png
+    - assets/images/Muffins copy.png
+    - assets/images/detail_GlazedSalmon_2 copy.png
+    - assets/images/460x533_ChickenThighs_2 copy.png
+    - assets/images/muffins_small.png
+    - assets/images/recipe1_small.png
+    - assets/images/salmon_small.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/pages/splash_page.dart';
+import 'package:recipe_app/view_model/recipe_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -20,7 +22,9 @@ void main() async {
     print(
         '=========================Error In init Prefrences ${e}========================');
   }
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => RecipeProvider()..getAds())
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

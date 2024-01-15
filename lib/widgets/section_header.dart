@@ -17,7 +17,7 @@ class SectionHeader extends StatelessWidget {
           Text(
             sectionName,
             style: const TextStyle(
-                fontSize: 23,
+                fontSize: 15,
                 fontFamily: 'Hellix_Bold ',
                 fontWeight: FontWeight.w900),
           ),
@@ -27,7 +27,7 @@ class SectionHeader extends StatelessWidget {
             },
             child: const Text(
               'See All',
-              style: TextStyle(fontSize: 15, color: (ColoresConst.mainColor)),
+              style: TextStyle(fontSize: 12, color: (ColoresConst.mainColor)),
             ),
           )
         ],

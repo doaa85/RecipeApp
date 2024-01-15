@@ -10,5 +10,5 @@ class Ad {
     return {'title': title, 'image': image};
   }
 
-  static fromJson(Map<String, dynamic> e) {}
+ 
 }
