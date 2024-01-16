@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe_app/firebase_options.dart';
 import 'package:recipe_app/pages/splash_page.dart';
 import 'package:recipe_app/view_model/recipe_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +15,9 @@ void main() async {
   try {
     var preference = await SharedPreferences.getInstance();
     GetIt.I.registerSingleton<SharedPreferences>(preference);
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
     // if (PreferencesServices.prefs != null) {
     //   print(
