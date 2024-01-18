@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:recipe_app/pages/home_page.pages.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/pages/login_page.pages.dart';
+import 'package:recipe_app/provider/app_auth.provider.dart';
 // class RegisterPage extends StatefulWidget {
 //   const RegisterPage({super.key});
 
@@ -227,7 +227,6 @@ import 'package:recipe_app/pages/login_page.pages.dart';
 //   }
 // }
 import 'package:recipe_app/widgets/widget_scrollable';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utilities/colores.dart';
 
@@ -247,10 +246,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    fullNameController = TextEditingController();
-    formkey = GlobalKey<FormState>();
+    Provider.of<AppAuthProvider>(context, listen: false).providerInit();
   }
 
   void toggleObsecure() {
@@ -272,82 +268,83 @@ class _RegisterPageState extends State<RegisterPage> {
           Container(
             decoration: const BoxDecoration(color: Colors.black38),
           ),
-          Form(
-            key: formkey,
-            child: WidgetScrollable(
-              isColumn: true,
-              columnMainAxisAlignment: MainAxisAlignment.center,
-              widgets: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 50, right: 50, top: 50, bottom: 25),
-                  child: Image.asset('assets/images/Logo (2).png'),
-                ),
-                const Text(
-                  'Register',
-                  style: TextStyle(color: Colors.white),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  keyboardType: TextInputType.emailAddress,
-                  controller: fullNameController,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    label: Text(
-                      'Full Name',
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.person_2_outlined,
-                      color: Colors.white,
-                    ),
+          Consumer<AppAuthProvider>(
+            builder: (context, AuthProvider, _) => Form(
+              key: AuthProvider.formKey,
+              child: WidgetScrollable(
+                isColumn: true,
+                columnMainAxisAlignment: MainAxisAlignment.center,
+                widgets: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 50, right: 50, top: 50, bottom: 25),
+                    child: Image.asset('assets/images/Logo (2).png'),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'full name is required';
-                    }
-
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: emailController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      fillColor: Colors.transparent,
-                      filled: true,
-                      hintStyle: TextStyle(color: Colors.white),
-                      hintText: 'email',
+                  const Text(
+                    'Register',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.emailAddress,
+                    controller: AuthProvider.nameController,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      label: Text(
+                        'Full Name',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
                       prefixIcon: Icon(
-                        Icons.person,
+                        Icons.person_2_outlined,
                         color: Colors.white,
-                      )),
-                  validator: (value) {
-                    if (value != null || (value?.isEmpty ?? false)) {
-                      return 'Email Is Required';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: passwordController,
-                  obscureText: obsecureText,
-                  decoration: const InputDecoration(
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'full name is required';
+                      }
+
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    controller: AuthProvider.emailController,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        fillColor: Colors.transparent,
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.white),
+                        hintText: 'email',
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        )),
+                    validator: (value) {
+                      if (value != null || (value?.isEmpty ?? false)) {
+                        return 'Email Is Required';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    controller: AuthProvider.passwordController,
+                    obscureText: AuthProvider.obsecureText!,
+                    decoration: InputDecoration(
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.white)),
                       enabledBorder: UnderlineInputBorder(
@@ -361,39 +358,53 @@ class _RegisterPageState extends State<RegisterPage> {
                       prefixIcon: Icon(
                         Icons.password,
                         color: Colors.white,
-                      )),
-                  validator: (value) {
-                    if (value != null || (value?.isEmpty ?? false)) {
-                      return 'Password Is Required';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(400, 50),
-                        backgroundColor: ColoresConst.mainColor),
-                    onPressed: () {
-                      if (!(formkey.currentState?.validate() ?? false)) {
-                        GetIt.I
-                            .get<SharedPreferences>()
-                            .setBool('isLogin', true);
-
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const HomePage()));
+                      ),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          AuthProvider.toggleObsecure();
+                        },
+                        child: Icon(
+                          AuthProvider.obsecureText!
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value != null || (value?.isEmpty ?? false)) {
+                        return 'Password Is Required';
                       }
+                      return null;
                     },
-                    child: const Text('Register',
-                        style: TextStyle(color: Colors.white))),
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size(400, 50),
+                          backgroundColor: ColoresConst.mainColor),
+                      onPressed: () {
+                        AuthProvider.signUp(context);
+                        // if (!(formkey.currentState?.validate() ?? false)) {
+                        //   GetIt.I
+                        //       .get<SharedPreferences>()
+                        //       .setBool('isLogin', true);
+
+                        //   Navigator.pushReplacement(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (_) => const HomePage()));
+                        // }
+                      },
+                      child: const Text('Register',
+                          style: TextStyle(color: Colors.white))),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                ],
+              ),
             ),
           ),
           if (MediaQuery.of(context).viewInsets.bottom == 0)

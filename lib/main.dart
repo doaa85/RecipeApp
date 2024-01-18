@@ -5,7 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/firebase_options.dart';
 import 'package:recipe_app/pages/splash_page.dart';
-import 'package:recipe_app/view_model/recipe_provider.dart';
+import 'package:recipe_app/provider/app_auth.provider.dart';
+import 'package:recipe_app/provider/recipe_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -28,7 +29,8 @@ void main() async {
         '=========================Error In init Prefrences ${e}========================');
   }
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => RecipeProvider()..getAds())
+    ChangeNotifierProvider(create: (_) => RecipeProvider()..getAds()),
+    ChangeNotifierProvider(create: (_) => AppAuthProvider())
   ], child: const MyApp()));
 }
 
