@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:recipe_app/pages/enter_page.pages.dart';
 import 'package:recipe_app/pages/home_page.pages.dart';
-import 'package:recipe_app/pages/login_page.pages.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -11,6 +13,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  StreamSubscription<User?>? _listener;
   @override
   void initState() {
     super.initState();
@@ -18,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void initSplash() async {
-    await Future.delayed(const Duration(seconds: 10));
+    // await Future.delayed(const Duration(seconds: 1));
     // // if (GetIt.I.get<SharedPreferences>().getBool('isLogin') ?? false) {
     // if (false) {
     //   Navigator.pushReplacement(
@@ -30,15 +33,22 @@ class _SplashPageState extends State<SplashPage> {
     //         builder: (_) => EnterPage(),
     //       ));
     // }
-    FirebaseAuth.instance.authStateChanges().listen((User) {
+    await Future.delayed(const Duration(seconds: 1));
+    _listener = FirebaseAuth.instance.authStateChanges().listen((User) {
       if (User == null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => LoginPage()));
+            context, MaterialPageRoute(builder: (_) => EnterPage()));
       } else {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => HomePage()));
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _listener?.cancel();
+    super.dispose();
   }
 
   @override

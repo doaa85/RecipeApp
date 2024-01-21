@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_app/pages/login_page.pages.dart';
 import 'package:recipe_app/provider/app_auth.provider.dart';
+
 // class RegisterPage extends StatefulWidget {
 //   const RegisterPage({super.key});
 
@@ -226,7 +226,6 @@ import 'package:recipe_app/provider/app_auth.provider.dart';
 //     );
 //   }
 // }
-import 'package:recipe_app/widgets/widget_scrollable';
 
 import '../utilities/colores.dart';
 
@@ -238,20 +237,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
-  late GlobalKey<FormState> formkey;
-  late TextEditingController fullNameController;
-  bool obsecureText = true;
   @override
   void initState() {
-    super.initState();
     Provider.of<AppAuthProvider>(context, listen: false).providerInit();
-  }
-
-  void toggleObsecure() {
-    obsecureText = !obsecureText;
-    setState(() {});
+    super.initState();
   }
 
   @override
@@ -260,7 +249,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/Mask Group 9.png'),
                     fit: BoxFit.cover)),
@@ -269,54 +258,27 @@ class _RegisterPageState extends State<RegisterPage> {
             decoration: const BoxDecoration(color: Colors.black38),
           ),
           Consumer<AppAuthProvider>(
-            builder: (context, AuthProvider, _) => Form(
-              key: AuthProvider.formKey,
-              child: WidgetScrollable(
-                isColumn: true,
-                columnMainAxisAlignment: MainAxisAlignment.center,
-                widgets: [
+            builder: (context, authProvider, _) => Form(
+              key: authProvider.formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 50, right: 50, top: 50, bottom: 25),
+                        left: 50, right: 50, top: 40, bottom: 25),
                     child: Image.asset('assets/images/Logo (2).png'),
                   ),
-                  const Text(
+                  Text(
                     'Register',
                     style: TextStyle(color: Colors.white),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   TextFormField(
+                    controller: authProvider.emailController,
                     style: TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.emailAddress,
-                    controller: AuthProvider.nameController,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      label: Text(
-                        'Full Name',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.person_2_outlined,
-                        color: Colors.white,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'full name is required';
-                      }
-
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  TextFormField(
-                    controller: AuthProvider.emailController,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         enabledBorder: UnderlineInputBorder(
@@ -331,114 +293,83 @@ class _RegisterPageState extends State<RegisterPage> {
                           Icons.person,
                           color: Colors.white,
                         )),
-                    validator: (value) {
-                      if (value != null || (value?.isEmpty ?? false)) {
-                        return 'Email Is Required';
-                      }
-                      return null;
-                    },
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   TextFormField(
-                    controller: AuthProvider.passwordController,
-                    obscureText: AuthProvider.obsecureText!,
+                    style: TextStyle(color: Colors.white),
+                    controller: authProvider.passwordController,
+                    obscureText: authProvider.obsecureText,
                     decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      fillColor: Colors.transparent,
-                      filled: true,
-                      hintStyle: TextStyle(color: Colors.white),
-                      hintText: 'password',
-                      prefixIcon: Icon(
-                        Icons.password,
-                        color: Colors.white,
-                      ),
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          AuthProvider.toggleObsecure();
-                        },
-                        child: Icon(
-                          AuthProvider.obsecureText!
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        fillColor: Colors.transparent,
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.white),
+                        hintText: 'password',
+                        prefixIcon: Icon(
+                          Icons.password,
                           color: Colors.white,
                         ),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value != null || (value?.isEmpty ?? false)) {
-                        return 'Password Is Required';
-                      }
-                      return null;
-                    },
+                        suffixIcon: InkWell(
+                          onTap: () => authProvider.toggleObsecure(),
+                          child: authProvider.obsecureText
+                              ? Icon(
+                                  Icons.visibility_off,
+                                  color: Colors.white,
+                                )
+                              : Icon(
+                                  Icons.visibility,
+                                  color: Colors.white,
+                                ),
+                        )),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
+                  ),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    controller: authProvider.nameController,
+                    decoration: const InputDecoration(
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        fillColor: Colors.transparent,
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.white),
+                        hintText: 'name',
+                        prefixIcon: Icon(
+                          Icons.document_scanner,
+                          color: Colors.white,
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          fixedSize: Size(400, 50),
+                          fixedSize: Size(400, 40),
                           backgroundColor: ColoresConst.mainColor),
                       onPressed: () {
-                        AuthProvider.signUp(context);
-                        // if (!(formkey.currentState?.validate() ?? false)) {
-                        //   GetIt.I
-                        //       .get<SharedPreferences>()
-                        //       .setBool('isLogin', true);
-
-                        //   Navigator.pushReplacement(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (_) => const HomePage()));
-                        // }
+                        authProvider.signUp(context);
                       },
-                      child: const Text('Register',
+                      child: Text('register',
                           style: TextStyle(color: Colors.white))),
-                  const SizedBox(
-                    height: 15,
+                  Spacer(
+                    flex: 2,
                   ),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: TextButton(
+                          onPressed: () {
+                            Provider.of<AppAuthProvider>(context, listen: false)
+                                .openLoginPage(context);
+                          },
+                          child: Text('LogIn')))
                 ],
               ),
             ),
           ),
-          if (MediaQuery.of(context).viewInsets.bottom == 0)
-            Positioned.fill(
-              bottom: 10,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        ' Already Registered ?',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (_) => LoginPage()));
-                        },
-                        child: const Text(
-                          '  Sign in',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/pages/home_page.pages.dart';
-import 'package:recipe_app/pages/register_page.pages.dart';
+import 'package:recipe_app/provider/app_auth.provider.dart';
 import 'package:recipe_app/utilities/colores.dart';
 // class LoginPage extends StatefulWidget {
 //   const LoginPage({super.key});
@@ -210,7 +210,6 @@ import 'package:recipe_app/utilities/colores.dart';
 // }
 
 import 'package:recipe_app/widgets/widget_scrollable';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -220,21 +219,170 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
-  late GlobalKey<FormState> formkey;
-  bool obsecureText = true;
+  // late TextEditingController emailController;
+  // late TextEditingController passwordController;
+  // late GlobalKey<FormState> formkey;
+  // bool obsecureText = true;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   emailController = TextEditingController();
+  //   passwordController = TextEditingController();
+  //   formkey = GlobalKey<FormState>();
+  // }
+
+  // void toggleObsecure() {
+  //   obsecureText = !obsecureText;
+  //   setState(() {});
+  // }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: Stack(
+  //       children: [
+  //         Container(
+  //           decoration: const BoxDecoration(
+  //               image: DecorationImage(
+  //                   image: AssetImage('assets/images/Mask Group 9.png'),
+  //                   fit: BoxFit.cover)),
+  //         ),
+  //         Container(
+  //           decoration: const BoxDecoration(color: Colors.black38),
+  //         ),
+  //         Form(
+  //           key: formkey,
+  //           child: WidgetScrollable(
+  //             isColumn: true,
+  //             columnMainAxisAlignment: MainAxisAlignment.center,
+  //             widgets: [
+  //               Padding(
+  //                 padding: const EdgeInsets.only(
+  //                     left: 50, right: 50, top: 50, bottom: 25),
+  //                 child: Image.asset('assets/images/Logo (2).png'),
+  //               ),
+  //               const Text(
+  //                 'Login',
+  //                 style: TextStyle(color: Colors.white),
+  //               ),
+  //               const SizedBox(
+  //                 height: 15,
+  //               ),
+  //               TextFormField(
+  //                 controller: emailController,
+  //                 style: const TextStyle(color: Colors.white),
+  //                 decoration: const InputDecoration(
+  //                     focusedBorder: UnderlineInputBorder(
+  //                         borderSide: BorderSide(color: Colors.white)),
+  //                     enabledBorder: UnderlineInputBorder(
+  //                         borderSide: BorderSide(color: Colors.white)),
+  //                     border: UnderlineInputBorder(
+  //                         borderSide: BorderSide(color: Colors.white)),
+  //                     fillColor: Colors.transparent,
+  //                     filled: true,
+  //                     hintStyle: TextStyle(color: Colors.white),
+  //                     hintText: 'email',
+  //                     prefixIcon: Icon(
+  //                       Icons.person,
+  //                       color: Colors.white,
+  //                     )),
+  //                 validator: (value) {
+  //                   if (value != null || (value?.isEmpty ?? false)) {
+  //                     return 'Email Is Required';
+  //                   }
+  //                   return null;
+  //                 },
+  //               ),
+  //               const SizedBox(
+  //                 height: 15,
+  //               ),
+  //               TextFormField(
+  //                 controller: passwordController,
+  //                 obscureText: obsecureText,
+  //                 decoration: const InputDecoration(
+  //                     focusedBorder: UnderlineInputBorder(
+  //                         borderSide: BorderSide(color: Colors.white)),
+  //                     enabledBorder: UnderlineInputBorder(
+  //                         borderSide: BorderSide(color: Colors.white)),
+  //                     border: UnderlineInputBorder(
+  //                         borderSide: BorderSide(color: Colors.white)),
+  //                     fillColor: Colors.transparent,
+  //                     filled: true,
+  //                     hintStyle: TextStyle(color: Colors.white),
+  //                     hintText: 'password',
+  //                     prefixIcon: Icon(
+  //                       Icons.password,
+  //                       color: Colors.white,
+  //                     )),
+  //                 validator: (value) {
+  //                   if (value != null || (value?.isEmpty ?? false)) {
+  //                     return 'Password Is Required';
+  //                   }
+  //                   return null;
+  //                 },
+  //               ),
+  //               const SizedBox(
+  //                 height: 15,
+  //               ),
+  //               ElevatedButton(
+  //                   style: ElevatedButton.styleFrom(
+  //                       fixedSize: Size(400, 50),
+  //                       backgroundColor: ColoresConst.mainColor),
+  //                   onPressed: () {
+  //                     if (!(formkey.currentState?.validate() ?? false)) {
+  //                       GetIt.I
+  //                           .get<SharedPreferences>()
+  //                           .setBool('isLogin', true);
+
+  //                       Navigator.pushReplacement(
+  //                           context,
+  //                           MaterialPageRoute(
+  //                               builder: (_) => const HomePage()));
+  //                     }
+  //                   },
+  //                   child:
+  //                       Text('Login', style: TextStyle(color: Colors.white))),
+  //               const SizedBox(
+  //                 height: 15,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //         if (MediaQuery.of(context).viewInsets.bottom == 0)
+  //           Positioned.fill(
+  //             bottom: 10,
+  //             child: Align(
+  //               alignment: Alignment.bottomCenter,
+  //               child: Padding(
+  //                 padding: EdgeInsets.only(top: 8),
+  //                 child: Row(
+  //                   mainAxisAlignment: MainAxisAlignment.center,
+  //                   children: [
+  //                     InkWell(
+  //                       onTap: () {
+  //                         Navigator.push(
+  //                             context,
+  //                             MaterialPageRoute(
+  //                                 builder: (_) => RegisterPage()));
+  //                       },
+  //                       child: Text(
+  //                         "dont Have Account , Register Now ?",
+  //                         style: TextStyle(color: Colors.white),
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           )
+  //       ],
+  //     ),
+  //   );
+  // }
   @override
   void initState() {
+    Provider.of<AppAuthProvider>(context, listen: false).providerInit();
     super.initState();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    formkey = GlobalKey<FormState>();
-  }
-
-  void toggleObsecure() {
-    obsecureText = !obsecureText;
-    setState(() {});
   }
 
   @override
@@ -243,7 +391,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/Mask Group 9.png'),
                     fit: BoxFit.cover)),
@@ -251,102 +399,110 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             decoration: const BoxDecoration(color: Colors.black38),
           ),
-          Form(
-            key: formkey,
-            child: WidgetScrollable(
-              isColumn: true,
-              columnMainAxisAlignment: MainAxisAlignment.center,
-              widgets: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 50, right: 50, top: 50, bottom: 25),
-                  child: Image.asset('assets/images/Logo (2).png'),
-                ),
-                const Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: emailController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      fillColor: Colors.transparent,
-                      filled: true,
-                      hintStyle: TextStyle(color: Colors.white),
-                      hintText: 'email',
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Colors.white,
-                      )),
-                  validator: (value) {
-                    if (value != null || (value?.isEmpty ?? false)) {
-                      return 'Email Is Required';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: passwordController,
-                  obscureText: obsecureText,
-                  decoration: const InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      fillColor: Colors.transparent,
-                      filled: true,
-                      hintStyle: TextStyle(color: Colors.white),
-                      hintText: 'password',
-                      prefixIcon: Icon(
-                        Icons.password,
-                        color: Colors.white,
-                      )),
-                  validator: (value) {
-                    if (value != null || (value?.isEmpty ?? false)) {
-                      return 'Password Is Required';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(400, 50),
-                        backgroundColor: ColoresConst.mainColor),
-                    onPressed: () {
-                      if (!(formkey.currentState?.validate() ?? false)) {
-                        GetIt.I
-                            .get<SharedPreferences>()
-                            .setBool('isLogin', true);
-
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const HomePage()));
+          Consumer<AppAuthProvider>(
+            builder: (context, authProvider, _) => Form(
+              key: authProvider.formKey,
+              child: WidgetScrollable(
+                isColumn: true,
+                columnMainAxisAlignment: MainAxisAlignment.center,
+                widgets: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 50, right: 50, top: 50, bottom: 25),
+                    child: Image.asset('assets/images/Logo (2).png'),
+                  ),
+                  Text(
+                    'Login',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    controller: authProvider.emailController,
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        fillColor: Colors.transparent,
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.white),
+                        hintText: 'email',
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        )),
+                    validator: (value) {
+                      if (value == null || (value?.isEmpty ?? false)) {
+                        return 'Email Is Required';
                       }
+                      return null;
                     },
-                    child:
-                        Text('Login', style: TextStyle(color: Colors.white))),
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    obscureText: authProvider.obsecureText,
+                    style: TextStyle(color: Colors.white),
+                    controller: authProvider.passwordController,
+                    decoration: InputDecoration(
+                        suffixIcon: InkWell(
+                          onTap: () => authProvider.toggleObsecure(),
+                          child: authProvider.obsecureText
+                              ? Icon(
+                                  Icons.visibility_off,
+                                  color: Colors.white,
+                                )
+                              : Icon(
+                                  Icons.visibility,
+                                  color: Colors.white,
+                                ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        fillColor: Colors.transparent,
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.white),
+                        hintText: 'password',
+                        prefixIcon: Icon(
+                          Icons.password,
+                          color: Colors.white,
+                        )),
+                    validator: (value) {
+                      if (value == null || (value?.isEmpty ?? false)) {
+                        return 'Password Is Required';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size(400, 50),
+                          backgroundColor: ColoresConst.mainColor),
+                      onPressed: () {
+                        authProvider.logIn(context);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => HomePage()));
+                      },
+                      child:
+                          Text('Login', style: TextStyle(color: Colors.white))),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                ],
+              ),
             ),
           ),
           if (MediaQuery.of(context).viewInsets.bottom == 0)
@@ -361,13 +517,15 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => RegisterPage()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (_) => const RegisterPage()));
+                          Provider.of<AppAuthProvider>(context, listen: false)
+                              .openRegisterPage(context);
                         },
-                        child: Text(
-                          "dont Have Account , Register Now ?",
+                        child: const Text(
+                          "don't Have Account , Register Now ?",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
