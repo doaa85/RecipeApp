@@ -4,6 +4,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_kit/overlay_kit.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe_app/pages/favourite_page.pages.dart';
 import 'package:recipe_app/provider/app_auth.provider.dart';
 import 'package:recipe_app/provider/recipe_provider.dart';
 import 'package:recipe_app/utilities/colores.dart';
@@ -267,13 +268,22 @@ class _HomePageState extends State<HomePage> {
                                       child: Stack(
                                         clipBehavior: Clip.none,
                                         children: [
-                                          const Positioned(
+                                          Positioned(
                                             top: 5,
                                             left: 160,
-                                            child: Icon(
-                                              Icons.favorite_border,
-                                              color: Colors.grey,
-                                              size: 15,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            FavouritePage()));
+                                              },
+                                              child: Icon(
+                                                Icons.favorite_border,
+                                                color: Colors.grey,
+                                                size: 15,
+                                              ),
                                             ),
                                           ),
                                           Positioned(
@@ -530,7 +540,13 @@ class _HomePageState extends State<HomePage> {
                                               height: 20,
                                               width: 30,
                                               child: IconButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              FavouritePage()));
+                                                },
                                                 icon: Icon(
                                                   Icons.favorite_border,
                                                   color: Colors.grey,

@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:recipe_app/models/recipes.model.dart';
 
@@ -8,7 +10,7 @@ class CustomCard extends StatelessWidget {
     super.key,
   });
 
-  Recipes recipe;
+  Recipe recipe;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class CustomCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${recipe.mealType}',
+                    '${recipe.type}',
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
                   ),
                   Text(
@@ -46,26 +48,26 @@ class CustomCard extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  Row(
+                 const  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(
+                       Icon(
                         Icons.star,
                         color: Colors.red,
                       ),
-                      const Icon(
+                       Icon(
                         Icons.star,
                         color: Colors.red,
                       ),
-                      const Icon(
+                       Icon(
                         Icons.star,
                         color: Colors.red,
                       ),
-                      const Icon(
+                       Icon(
                         Icons.star,
                         color: Colors.red,
                       ),
-                      const Icon(
+                       Icon(
                         Icons.star,
                         color: Colors.red,
                       ),
@@ -83,12 +85,12 @@ class CustomCard extends StatelessWidget {
                     children: [
                       Icon(Icons.timelapse),
                       Text(
-                        '${recipe.prepTime} preptime',
+                        '${recipe.total_time} preptime',
                         style: TextStyle(color: Colors.grey),
                       ),
                       Icon(Icons.room_service_rounded),
                       Text(
-                        '${recipe.serving} serving',
+                        '${recipe.servings} serving',
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -102,7 +104,7 @@ class CustomCard extends StatelessWidget {
             right: 32,
             top: -35,
             child: Image.network(
-              recipe.image,
+              recipe.imageUrl!,
               height: 100,
               width: 100,
             ))
