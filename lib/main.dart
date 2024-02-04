@@ -5,8 +5,10 @@ import 'package:overlay_kit/overlay_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/firebase_options.dart';
 import 'package:recipe_app/pages/splash_page.dart';
+import 'package:recipe_app/provider/ads_provider.dart';
 import 'package:recipe_app/provider/app_auth.provider.dart';
-import 'package:recipe_app/provider/recipe_provider.dart';
+import 'package:recipe_app/provider/ingredients.provider.dart';
+import 'package:recipe_app/provider/recipes_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -29,8 +31,10 @@ void main() async {
         '=========================Error In init Prefrences ${e}========================');
   }
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => RecipeProvider()..getAds()),
-    ChangeNotifierProvider(create: (_) => AppAuthProvider())
+    ChangeNotifierProvider(create: (_) => AdsProvider()),
+    ChangeNotifierProvider(create: (_) => AppAuthProvider()),
+    ChangeNotifierProvider(create: (_) => IngredientsProvider()),
+    ChangeNotifierProvider(create: (_) => RecipesProvider()),
   ], child: const MyApp()));
 }
 
@@ -53,6 +57,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return OverlayKit(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           fontFamily: 'Hellix',

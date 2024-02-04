@@ -11,13 +11,15 @@ class Recipe {
   num? total_time;
   String? type;
   List<String>? favourite_users_ids;
+  List<String>? recently_viewed_users_ids;
+  bool? isFrish;
 
   Recipe();
 
   Recipe.fromJson(Map<String, dynamic> data, [String? id]) {
     docId = id;
     calories = data['calories'];
-    description = data['describtion'];
+    description = data['description'];
     directions = data['directions'] != null
         ? Map<String, String>.from(data['directions'])
         : null;
@@ -33,6 +35,7 @@ class Recipe {
     favourite_users_ids = data['users_ids'] != null
         ? List<String>.from(data['users_ids'].map((e) => e.toString()))
         : null;
+    isFrish = data['isFrish'];
   }
 
   Map<String, dynamic> toJson() {
