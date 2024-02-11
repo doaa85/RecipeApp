@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/pages/edit_profile_page.pages.dart';
 import 'package:recipe_app/pages/home_page.pages.dart';
+import 'package:recipe_app/provider/app_auth.provider.dart';
+import 'package:recipe_app/utilities/colores.dart';
 import 'package:recipe_app/utilities/numbers.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -14,10 +18,16 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Padding(
+        leading: Padding(
           padding:
               EdgeInsets.symmetric(horizontal: Numbers.appHorizontalPadding),
-          child: Icon(Icons.menu),
+          child: GestureDetector(
+            child: Icon(Icons.menu),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomePage()));
+            },
+          ),
         ),
         actions: [
           Padding(
@@ -27,8 +37,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   // Icon(Icons.logout_sharp),
                   IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                  Provider.of<AppAuthProvider>(context, listen: false)
+                      .signOut(context);
                 },
                 icon: Icon(Icons.logout_sharp),
               ))
@@ -37,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -48,6 +58,77 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
           ),
+          SizedBox(
+            height: 70,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              height: 65,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: ColoresConst.kBlueColor),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.language,
+                      size: 40,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text('Language'),
+                    SizedBox(
+                      width: 130,
+                    ),
+                    Text(
+                      'English',
+                      style: TextStyle(fontSize: 18, color: Colors.red),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              height: 65,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: ColoresConst.kBlueColor),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    InkWell(
+                        child: Icon(
+                          Icons.edit,
+                          size: 40,
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => EditProfilePage()));
+                        }),
+                    SizedBox(
+                      width: 180,
+                    ),
+                    Text(
+                      'Edit Profile',
+                      style: TextStyle(fontSize: 18, color: Colors.red),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

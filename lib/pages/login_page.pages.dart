@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe_app/pages/forgot_password_page.pages.dart';
 import 'package:recipe_app/pages/home_page.pages.dart';
 import 'package:recipe_app/provider/app_auth.provider.dart';
 import 'package:recipe_app/utilities/colores.dart';
@@ -391,7 +392,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration:const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/Mask Group 9.png'),
                     fit: BoxFit.cover)),
@@ -411,7 +412,7 @@ class _LoginPageState extends State<LoginPage> {
                         left: 50, right: 50, top: 50, bottom: 25),
                     child: Image.asset('assets/images/Logo (2).png'),
                   ),
-                  Text(
+                 const Text(
                     'Login',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -420,8 +421,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextFormField(
                     controller: authProvider.emailController,
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                    style: const TextStyle(color: Colors.white),
+                    decoration:const InputDecoration(
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         enabledBorder: UnderlineInputBorder(
@@ -448,32 +449,32 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextFormField(
                     obscureText: authProvider.obsecureText,
-                    style: TextStyle(color: Colors.white),
+                    style:const TextStyle(color: Colors.white),
                     controller: authProvider.passwordController,
                     decoration: InputDecoration(
                         suffixIcon: InkWell(
                           onTap: () => authProvider.toggleObsecure(),
                           child: authProvider.obsecureText
-                              ? Icon(
+                              ?const Icon(
                                   Icons.visibility_off,
                                   color: Colors.white,
                                 )
-                              : Icon(
+                              :  const Icon(
                                   Icons.visibility,
                                   color: Colors.white,
                                 ),
                         ),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder:const  UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
-                        enabledBorder: UnderlineInputBorder(
+                        enabledBorder:const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
-                        border: UnderlineInputBorder(
+                        border: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         fillColor: Colors.transparent,
                         filled: true,
-                        hintStyle: TextStyle(color: Colors.white),
+                        hintStyle:const TextStyle(color: Colors.white),
                         hintText: 'password',
-                        prefixIcon: Icon(
+                        prefixIcon:const Icon(
                           Icons.password,
                           color: Colors.white,
                         )),
@@ -483,6 +484,23 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       return null;
                     },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        child: const Text(
+                          'Forgot Password ?',
+                          style: TextStyle(color: Colors.blueAccent),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => ForgotPasswordPage()));
+                        },
+                      )
+                    ],
                   ),
                   const SizedBox(
                     height: 15,

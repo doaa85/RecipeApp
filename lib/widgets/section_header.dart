@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/pages/all_recipes.pages.dart';
 import 'package:recipe_app/utilities/colores.dart';
 import 'package:recipe_app/utilities/numbers.dart';
 
@@ -23,6 +24,8 @@ class SectionHeader extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => AllRecipesPage()));
               print('See All');
             },
             child: const Text(

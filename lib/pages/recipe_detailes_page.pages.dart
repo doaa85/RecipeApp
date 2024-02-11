@@ -21,7 +21,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
   void initState() {
     Provider.of<RecipesProvider>(context, listen: false)
         .addRecipeToUserRecentlyViewed(widget.recipe.docId!);
-       
+
     super.initState();
   }
 
@@ -81,8 +81,8 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
 
                       setState(() {});
                     },
-                    child: !isInList
-                        ?const Icon(
+                    child: isInList
+                        ? const Icon(
                             Icons.favorite_border_rounded,
                             size: 30,
                             color: Colors.red,
