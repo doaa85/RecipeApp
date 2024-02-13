@@ -14,23 +14,37 @@ class SelectedRecipesPage extends StatefulWidget {
 class _SelectedRecipesPageState extends State<SelectedRecipesPage> {
   List<Recipe> get recipesList => recipesList;
 
-  @override
-  void initState() {
-    Provider.of<RecipesProvider>(listen: false, context).getFilteredResult();
-    super.initState();
-  }
+  get selectedUserValue => selectedUserValue;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.builder(
-        itemCount: recipesList.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: recipesList.map((e) => RecipeWidget(recipe: e)).toList(),
-          );
-        },
+      // body: ListView.builder(
+      //   itemCount: recipesList.length,
+      //   itemBuilder: (context, index) {
+      //     return Column(
+      //       children: recipesList.map((e) => RecipeWidget(recipe: e)).toList(),
+      //     );
+      //   },
+      // ),
+      body: Flexible(
+        child: Consumer<RecipesProvider>(
+            builder: (ctx, recipesProvider, _) => recipesProvider
+                        .filteredRecipesList ==
+                    null
+                ? const CircularProgressIndicator()
+                : (recipesProvider.filteredRecipesList?.isEmpty ?? false)
+                    ? const Text('No Data Found')
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: recipesProvider.filteredRecipesList!.length,
+                        itemBuilder: (ctx, index) => RecipeWidget(
+                              recipe:
+                                  recipesProvider.filteredRecipesList![index],
+                            ))),
       ),
     );
   }

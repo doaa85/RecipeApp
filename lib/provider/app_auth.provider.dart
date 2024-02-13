@@ -29,7 +29,7 @@ class AppAuthProvider extends ChangeNotifier {
   }
 
   void openRegisterPage(BuildContext context) {
-    // providerDispose();
+    providerDispose();
     Navigator.push(
         context, MaterialPageRoute(builder: (_) => const RegisterPage()));
   }

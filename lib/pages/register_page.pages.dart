@@ -237,6 +237,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  GlobalKey<FormState>? formKey;
   @override
   void initState() {
     Provider.of<AppAuthProvider>(context, listen: false).providerInit();
@@ -259,7 +260,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           Consumer<AppAuthProvider>(
             builder: (context, authProvider, _) => Form(
-              key: authProvider.formKey,
+              key: formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

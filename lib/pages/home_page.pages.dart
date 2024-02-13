@@ -73,7 +73,9 @@ class _HomePageState extends State<HomePage> {
                 ), // circleAvatar
                 // circleAvatar
                 Text(
+                  // 'salma'
                   FirebaseAuth.instance.currentUser!.displayName!,
+
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 22,
@@ -121,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const RecentlyViewedPage()));
+                            builder: (_) =>  RecentlyViewedPage()));
                   },
                   leading: const Icon(Icons.play_arrow),
                   title: const Text('Recently Viewad '),

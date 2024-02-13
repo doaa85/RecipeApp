@@ -222,16 +222,33 @@ import 'package:recipe_app/utilities/toast_messege_status.utils.dart';
 import 'package:recipe_app/widgets/toast_messege_widget.widgets.dart';
 
 class RecipesProvider extends ChangeNotifier {
-  var value = {"type": "launch", "serving": 5, "total_time": 20,'calories':447};
+  // var value = {"type": "launch", "serving": 5, "total_time": 20,'calories':447};
+  var info;
+  List<Recipe>? _filteredRecipesList;
+   List<Recipe>? get filteredRecipesList => _filteredRecipesList;
 
-  void getFilteredResult() async {
-    var ref = FirebaseFirestore.instance.collection('recipes');
+  void getFilteredResult(selectedUserValue) async {
+    Query<Map<String, dynamic>> ref =
+        FirebaseFirestore.instance.collection('recipes');
 
-    for (var entry in value.entries) {
-      ref.where(entry.key, isEqualTo: entry.value);
+    for (var entry in selectedUserValue.entries) {
+      info = await ref.where(entry.key, isEqualTo: entry.value);
     }
+    print('>>>>>>>>>>>>>>>>>>>>$ref');
 
-    var result = await ref.get();
+    try {
+      var result = await info.get();
+      if (result.docs.isNotEmpty) {
+        _filteredRecipesList = List<Recipe>.from(
+            result.docs.map((doc) => Recipe.fromJson(doc.data(), doc.id)));
+      } else {
+        _filteredRecipesList = [];
+      }
+      notifyListeners();
+    } catch (e) {
+      _filteredRecipesList = [];
+      notifyListeners();
+    }
   }
 
   List<Recipe>? _recipesList;

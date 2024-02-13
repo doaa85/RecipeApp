@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe_app/pages/selected_recipes_page.pages.dart';
 import 'package:recipe_app/provider/recipes_provider.dart';
 import 'package:recipe_app/utilities/colores.dart';
 import 'package:recipe_app/widgets/slider_widget.widgets.dart';
@@ -164,9 +165,9 @@ class _FilterPageState extends State<FilterPage> {
           ElevatedButton(
             onPressed: () {
               Provider.of<RecipesProvider>(listen: false, context)
-                  .getFilteredResult();
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (_) => SelectedRecipesPage()));
+                  .getFilteredResult(selectedUserValue);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => SelectedRecipesPage()));
             },
             child: Text(
               'Apply',

@@ -6,7 +6,9 @@ import 'package:overlay_kit/overlay_kit.dart';
 import 'package:recipe_app/provider/app_auth.provider.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  const EditProfilePage({
+    super.key,
+  });
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -46,9 +48,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 OverlayLoadingProgress.stop();
               },
               child: const Text('upload image')),
+          SizedBox(
+            height: 20,
+          ),
           TextFormField(
-            onChanged: (value) =>
-                FirebaseAuth.instance.currentUser?.updateDisplayName(value),
+            onFieldSubmitted: (value) async {
+              if (nameController.text.isNotEmpty) {
+                // String value = nameController.text;
+                await FirebaseAuth.instance.currentUser
+                    ?.updateDisplayName(nameController.text);
+
+                nameController.clear();
+              }
+              Navigator.of(context).pop();
+            },
             style: TextStyle(color: Colors.black),
             controller: AppAuthProvider().nameController,
             decoration: const InputDecoration(
@@ -57,7 +70,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 fillColor: Colors.transparent,
                 filled: true,
                 hintStyle: TextStyle(color: Colors.black),
-                hintText: 'name',
+                hintText: 'Enter name',
                 prefixIcon: Icon(
                   Icons.document_scanner,
                   color: Colors.white,

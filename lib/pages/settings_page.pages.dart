@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:recipe_app/pages/edit_profile_page.pages.dart';
 import 'package:recipe_app/pages/home_page.pages.dart';
-import 'package:recipe_app/provider/app_auth.provider.dart';
 import 'package:recipe_app/utilities/colores.dart';
 import 'package:recipe_app/utilities/numbers.dart';
 
@@ -37,8 +35,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   // Icon(Icons.logout_sharp),
                   IconButton(
                 onPressed: () {
-                  Provider.of<AppAuthProvider>(context, listen: false)
-                      .signOut(context);
+                  // Provider.of<AppAuthProvider>(context, listen: false)
+                  //     .signOut(context);
+                  Navigator.of(context).pop();
                 },
                 icon: Icon(Icons.logout_sharp),
               ))

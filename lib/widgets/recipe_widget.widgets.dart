@@ -193,7 +193,6 @@ import 'package:recipe_app/utilities/numbers.dart';
 //   }
 // }
 
-
 class RecipeWidget extends StatefulWidget {
   final Recipe? recipe;
 
@@ -225,9 +224,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               height: 230,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: 
-                    ColoresConst.kprimaryColor
-                  ),
+                  color: ColoresConst.kprimaryColor),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -238,15 +235,15 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                       child: Image.network(
                         widget.recipe?.imageUrl ?? "",
                         fit: BoxFit.cover,
-                        width: 160,
-                        height: 86,
+                        width: 60,
+                        height: 40,
                       ),
                     ),
                     Text(
                       widget.recipe?.type ?? 'No Type Found',
                       style: TextStyle(
                         color: ColoresConst.titleColor,
-                        fontSize: 8,
+                        fontSize: 7,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -258,12 +255,12 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     const SizedBox(
-                      height: 6,
+                      height: 4,
                     ),
                     RatingBar.builder(
                       initialRating: 4,
@@ -273,7 +270,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                       updateOnDrag: false,
                       unratedColor: Colors.grey,
                       itemCount: 5,
-                      itemSize: 15,
+                      itemSize: 13,
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -288,18 +285,18 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                     Text(
                       widget.recipe?.calories.toString() ?? '',
                       style: const TextStyle(
-                        fontSize: 8,
+                        fontSize: 7,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
                     const SizedBox(
-                      height: 7,
+                      height: 5,
                     ),
                     Row(
                       children: [
                         const Icon(
                           Icons.access_time,
-                          size: 20,
+                          size: 18,
                           color: Colors.grey,
                         ),
                         const SizedBox(
@@ -308,7 +305,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                         Text(
                           widget.recipe?.total_time.toString() ?? "",
                           style: const TextStyle(
-                            fontSize: 8,
+                            fontSize: 7,
                             fontWeight: FontWeight.normal,
                             color: Colors.grey,
                           ),
@@ -316,7 +313,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                         const Spacer(),
                         const Icon(
                           Icons.room_service_outlined,
-                          size: 20,
+                          size: 18,
                           color: Colors.grey,
                         ),
                         const SizedBox(
@@ -325,7 +322,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                         Text(
                           "${widget.recipe?.servings ?? 0}",
                           style: const TextStyle(
-                            fontSize: 8,
+                            fontSize: 7,
                             fontWeight: FontWeight.normal,
                             color: Colors.grey,
                           ),

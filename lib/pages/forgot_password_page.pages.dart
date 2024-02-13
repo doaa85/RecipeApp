@@ -13,6 +13,7 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final emailController = TextEditingController();
+  GlobalKey<FormState>? formKey;
   @override
   void initState() {
     Provider.of<AppAuthProvider>(context, listen: false).providerInit();
@@ -24,26 +25,26 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return Scaffold(
       appBar: AppBar(title: Text('Reset Password')),
       body: Padding(
-        padding:const  EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Consumer<AppAuthProvider>(
           builder: (context, authProvider, _) => Form(
-            key: authProvider.formKey,
+            key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextFormField(
                   controller: authProvider.emailController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                   decoration: const InputDecoration(
                       focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
+                          borderSide: BorderSide(color: Colors.blue)),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
+                          borderSide: BorderSide(color: Colors.blue)),
                       border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
+                          borderSide: BorderSide(color: Colors.blue)),
                       fillColor: Colors.transparent,
                       filled: true,
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.black),
                       hintText: 'email',
                       prefixIcon: Icon(
                         Icons.person,
@@ -61,7 +62,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
                 TextFormField(
                   obscureText: authProvider.obsecureText,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.blue),
                   controller: authProvider.passwordController,
                   decoration: InputDecoration(
                       suffixIcon: InkWell(
@@ -69,26 +70,26 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         child: authProvider.obsecureText
                             ? const Icon(
                                 Icons.visibility_off,
-                                color: Colors.white,
+                                color: Colors.black,
                               )
                             : const Icon(
                                 Icons.visibility,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                       ),
                       focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
+                          borderSide: BorderSide(color: Colors.blue)),
                       enabledBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
+                          borderSide: BorderSide(color: Colors.blue)),
                       border: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.white)),
                       fillColor: Colors.transparent,
                       filled: true,
-                      hintStyle: const TextStyle(color: Colors.white),
+                      hintStyle: const TextStyle(color: Colors.black),
                       hintText: 'password',
                       prefixIcon: const Icon(
                         Icons.password,
-                        color: Colors.white,
+                        color: Colors.black,
                       )),
                   validator: (value) {
                     if (value == null || (value?.isEmpty ?? false)) {
@@ -98,11 +99,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   },
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 30,
                 ),
                 ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
-                        minimumSize:const  Size.fromHeight(50)),
+                        backgroundColor: Colors.white30,
+                        minimumSize: const Size.fromHeight(50)),
                     onPressed: () {
                       resetPassword();
                     },
@@ -123,7 +125,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) =>const  Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
     try {
