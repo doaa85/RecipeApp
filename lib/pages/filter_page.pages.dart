@@ -15,9 +15,29 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
+  // get currentSliderValue => currentSliderValue;
   var selectedUserValue = {};
+  double currentSliderValue = 20;
 
-  get currentSliderValue => currentSliderValue;
+  // get selectedUserValue => selectedUserValue;
+
+  //  double get currentSliderValue => currentSliderValue();
+
+  // static get selectedUserValue => selectedUserValue;
+  // var value = {
+  //   "type": selectedUserValue,
+  //   "servings":currentSliderValue(),
+  //   "total_time": 20,
+  //   'calories': 447
+  // };
+  // $("#value-slider").slider("value", $("#value-slider").slider("option", "min") );
+// $("#value-slider").empty();
+
+  @override
+  // void initState() {
+  //   Provider.of<RecipesProvider>(context, listen: false).providerDispose();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +58,10 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 TextButton(
                   onPressed: () {
+                    // Provider.of<RecipesProvider>(context, listen: false)
+                    //     .providerDispose();
+                    currentSliderValue == 0.0;
                     selectedUserValue.clear();
-                    currentSliderValue == 0;
                     setState(() {});
                   },
                   child: const Text(
@@ -71,6 +93,7 @@ class _FilterPageState extends State<FilterPage> {
                 children: [
                   InkWell(
                     onTap: () {
+                      var selectedUserValue;
                       selectedUserValue['type'] = "breakfast";
                       setState(() {});
                     },

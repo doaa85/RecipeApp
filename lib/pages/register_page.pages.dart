@@ -237,7 +237,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  GlobalKey<FormState>? formKey;
+  var formkey = GlobalKey<FormState>();
   @override
   void initState() {
     Provider.of<AppAuthProvider>(context, listen: false).providerInit();
@@ -250,7 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration:const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/Mask Group 9.png'),
                     fit: BoxFit.cover)),
@@ -260,7 +260,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           Consumer<AppAuthProvider>(
             builder: (context, authProvider, _) => Form(
-              key: formKey,
+              key: authProvider.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -269,7 +269,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         left: 50, right: 50, top: 40, bottom: 25),
                     child: Image.asset('assets/images/Logo (2).png'),
                   ),
-                  Text(
+                const  Text(
                     'Register',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -278,8 +278,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   TextFormField(
                     controller: authProvider.emailController,
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                    style:const  TextStyle(color: Colors.white),
+                    decoration:const InputDecoration(
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         enabledBorder: UnderlineInputBorder(

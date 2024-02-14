@@ -225,7 +225,9 @@ class RecipesProvider extends ChangeNotifier {
   // var value = {"type": "launch", "serving": 5, "total_time": 20,'calories':447};
   var info;
   List<Recipe>? _filteredRecipesList;
-   List<Recipe>? get filteredRecipesList => _filteredRecipesList;
+  List<Recipe>? get filteredRecipesList => _filteredRecipesList;
+  
+  get currentSliderValue => currentSliderValue;
 
   void getFilteredResult(selectedUserValue) async {
     Query<Map<String, dynamic>> ref =
@@ -249,6 +251,12 @@ class RecipesProvider extends ChangeNotifier {
       _filteredRecipesList = [];
       notifyListeners();
     }
+  }
+   void providerDispose() {
+    var selectedUserValue;
+    selectedUserValue.clear();
+   currentSliderValue == null;
+   
   }
 
   List<Recipe>? _recipesList;
@@ -386,6 +394,7 @@ class RecipesProvider extends ChangeNotifier {
       }
       await _updateRecipe(recipeId);
       OverlayLoadingProgress.stop();
+      notifyListeners();
     } catch (e) {
       OverlayLoadingProgress.stop();
       OverlayToastMessage.show(

@@ -15,7 +15,8 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-  
+  final _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +24,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
       //   title: Text('Favourites page'),
       // ),
       appBar: AppBar(
+        title: Text('Favourits'),
         leading: const Padding(
           padding:
               EdgeInsets.symmetric(horizontal: Numbers.appHorizontalPadding),
@@ -48,14 +50,15 @@ class _FavouritesPageState extends State<FavouritesPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    'Favourits',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ],
+              child: Container(
+                height: 30,
+                width: 70,
+                // child: TextField(
+                //   controller: _controller,
+                //   onTap: () => _controller.selection = TextSelection(
+                //       baseOffset: 0,
+                //       extentOffset: _controller.value.text.length),
+                // ),
               ),
             ),
             SizedBox(

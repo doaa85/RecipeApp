@@ -19,15 +19,9 @@ class _SelectedRecipesPageState extends State<SelectedRecipesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      // body: ListView.builder(
-      //   itemCount: recipesList.length,
-      //   itemBuilder: (context, index) {
-      //     return Column(
-      //       children: recipesList.map((e) => RecipeWidget(recipe: e)).toList(),
-      //     );
-      //   },
-      // ),
+      appBar: AppBar(
+        title:const Text('Selected Recipes'),
+      ),
       body: Flexible(
         child: Consumer<RecipesProvider>(
             builder: (ctx, recipesProvider, _) => recipesProvider
