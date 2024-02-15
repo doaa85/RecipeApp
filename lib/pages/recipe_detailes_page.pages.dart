@@ -57,11 +57,11 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    fontSize: 17,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 InkWell(
@@ -74,6 +74,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                       if (isInList) {
                         widget.recipe.favourite_users_ids
                             ?.remove(FirebaseAuth.instance.currentUser?.uid);
+                        setState(() {});
                       } else {
                         widget.recipe.favourite_users_ids
                             ?.add(FirebaseAuth.instance.currentUser!.uid);
@@ -81,13 +82,15 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
 
                       setState(() {});
                     },
-                    child: isInList
-                        ? const Icon(
+                    child: widget.recipe.favourite_users_ids?.contains(
+                                FirebaseAuth.instance.currentUser?.uid) ??
+                            false
+                        ? Icon(
                             Icons.favorite_border_rounded,
                             size: 30,
                             color: Colors.red,
                           )
-                        : const Icon(
+                        : Icon(
                             Icons.favorite_rounded,
                             size: 30,
                             color: Colors.grey,
@@ -106,13 +109,13 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                     fontWeight: FontWeight.normal,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
-                Text(
+                const Text(
                   'Calories',
-                  style: const TextStyle(
-                    fontSize: 18,
+                  style: TextStyle(
+                    fontSize: 16,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -169,7 +172,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                       )
                       // const Spacer(),
                       ,
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Row(
@@ -194,13 +197,13 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 150,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Flexible(
@@ -223,6 +226,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
               ),
             ),
             ListTile(
+              minLeadingWidth: MediaQuery.of(context).size.width,
               subtitle: FutureBuilder(
                   future: FirebaseFirestore.instance
                       .collection('ingredients')
@@ -254,9 +258,15 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                         }
 
                         if (isExsist) {
-                          return Icon(Icons.check);
+                          return Icon(
+                            Icons.check,
+                            size: 20,
+                          );
                         } else {
-                          return Icon(Icons.close);
+                          return Icon(
+                            Icons.close,
+                            size: 20,
+                          );
                         }
                       }
 
@@ -279,7 +289,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                   }),
               title: Text(widget.recipe.title ?? 'No Title'),
             ),
-            Text(
+            const Text(
               'directions',
               style: TextStyle(fontSize: 25),
             ),

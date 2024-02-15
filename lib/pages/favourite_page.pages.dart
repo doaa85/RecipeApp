@@ -3,8 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexible_grid_view/flexible_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/models/recipes.model.dart';
-import 'package:recipe_app/pages/home_page.pages.dart';
-import 'package:recipe_app/utilities/numbers.dart';
+import 'package:recipe_app/widgets/custom_search_widget.widgets.dart';
 import 'package:recipe_app/widgets/recipe_widget.widgets.dart';
 
 class FavouritesPage extends StatefulWidget {
@@ -15,51 +14,17 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-  final _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Favourites page'),
-      // ),
-      appBar: AppBar(
-        title: Text('Favourits'),
-        leading: const Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: Numbers.appHorizontalPadding),
-          child: Icon(Icons.menu),
-        ),
-        actions: [
-          Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Numbers.appHorizontalPadding),
-              child:
-                  // Icon(Icons.logout_sharp),
-                  IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => HomePage()));
-                },
-                icon: Icon(Icons.logout_sharp),
-              ))
-        ],
-      ),
+      appBar: const PreferredSize(
+          preferredSize: Size.square(60.0), child: CustomSearchWidget()),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 30,
-                width: 70,
-                // child: TextField(
-                //   controller: _controller,
-                //   onTap: () => _controller.selection = TextSelection(
-                //       baseOffset: 0,
-                //       extentOffset: _controller.value.text.length),
-                // ),
-              ),
+            Text('Favourits', style: TextStyle(fontSize: 24)),
+            const SizedBox(
+              height: 30,
             ),
             SizedBox(
               height: 200,

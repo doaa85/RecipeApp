@@ -260,7 +260,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                       ),
                     ),
                     const SizedBox(
-                      height: 4,
+                      height: 3,
                     ),
                     RatingBar.builder(
                       initialRating: 4,

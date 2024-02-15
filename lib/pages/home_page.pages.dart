@@ -31,6 +31,9 @@ class _HomePageState extends State<HomePage> {
 
   var adsList;
   var recommandedRecipesList;
+
+  String get refresnce => refresnce;
+  String getDownloadURL() => FirebaseAuth.instance.currentUser!.photoURL!;
   @override
   void initState() {
     controller = ZoomDrawerController();
@@ -61,16 +64,16 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Colors.white,
-                  // child: CircleAvatar(
-                  //   radius: 50,
-                  // ),
-                  backgroundImage: NetworkImage
-                      // FirebaseAuth.instance.currentUser!.photoURL!)
+                    radius: 60,
+                    backgroundColor: Colors.white,
+                    // child: CircleAvatar(
+                    //   radius: 50,
+                    // ),
+                    backgroundImage: NetworkImage
+                    //("  ${refresnce.getDownloadURL}")
 
-                      ('https://firebasestorage.googleapis.com/v0/b/recipe-app-6d083.appspot.com/o/reciepes%2FIMG_%D9%A2%D9%A0%D9%A2%D9%A3%D9%A0%D9%A6%D9%A2%D9%A3_%D9%A2%D9%A3%D9%A0%D9%A7%D9%A3%D9%A4.jpg?alt=media&token=c0478655-9e3d-44c1-878d-f48fc2b6dec2'),
-                ), // circleAvatar
+                    ('https://firebasestorage.googleapis.com/v0/b/recipe-app-6d083.appspot.com/o/reciepes%2FIMG_%D9%A2%D9%A0%D9%A2%D9%A3%D9%A0%D9%A6%D9%A2%D9%A3_%D9%A2%D9%A3%D9%A0%D9%A7%D9%A3%D9%A4.jpg?alt=media&token=c0478655-9e3d-44c1-878d-f48fc2b6dec2'),
+                    ), // circleAvatar
                 // circleAvatar
                 Text(
                   // 'salma'
@@ -123,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) =>  RecentlyViewedPage()));
+                            builder: (_) => RecentlyViewedPage()));
                   },
                   leading: const Icon(Icons.play_arrow),
                   title: const Text('Recently Viewad '),
@@ -176,7 +179,7 @@ class _HomePageState extends State<HomePage> {
             ),
             backgroundColor: ColoresConst.kLightColor,
             body: Container(
-              margin: const EdgeInsets.only(top: 5, left: 20, right: 20),
+              margin: const EdgeInsets.only(top: 0, left: 20, right: 20),
               child: Column(children: [
                 SizedBox(
                   height: 15,
@@ -191,10 +194,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 5,
                 ),
                 Container(
-                  height: 30,
+                  height: 25,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -209,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 6,
+                  height: 2,
                 ),
                 Row(
                   children: [
@@ -222,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                                   builder: (_) => const FilterPage()));
                         },
                         child: Container(
-                          height: 30,
+                          height: 25,
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               color: ColoresConst.kprimaryColor,
@@ -246,14 +249,14 @@ class _HomePageState extends State<HomePage> {
                                   builder: (_) => const FilterPage()));
                         },
                         child: Container(
-                          height: 30,
+                          height: 25,
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               color: ColoresConst.kprimaryColor,
                               borderRadius: BorderRadius.circular(12)),
                           child: Icon(
                             Icons.tune,
-                            size: 20,
+                            size: 18,
                           ),
                         ),
                       ),
@@ -261,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 SizedBox(
-                  height: 7,
+                  height: 2,
                 ),
                 AdsWidget(),
                 // const SizedBox(
@@ -279,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                               ? const Text('No Data Found')
                               : ListView.builder(
                                   shrinkWrap: true,
-                                  physics: AlwaysScrollableScrollPhysics(),
+                                  // physics: AlwaysScrollableScrollPhysics(),
                                   scrollDirection: Axis.horizontal,
                                   itemCount:
                                       recipesProvider.freshRecipesList!.length,

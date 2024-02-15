@@ -226,7 +226,7 @@ class RecipesProvider extends ChangeNotifier {
   var info;
   List<Recipe>? _filteredRecipesList;
   List<Recipe>? get filteredRecipesList => _filteredRecipesList;
-  
+
   get currentSliderValue => currentSliderValue;
 
   void getFilteredResult(selectedUserValue) async {
@@ -252,11 +252,11 @@ class RecipesProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-   void providerDispose() {
+
+  void providerDispose() {
     var selectedUserValue;
     selectedUserValue.clear();
-   currentSliderValue == null;
-   
+    currentSliderValue == null;
   }
 
   List<Recipe>? _recipesList;

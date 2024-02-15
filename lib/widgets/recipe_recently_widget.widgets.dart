@@ -18,12 +18,14 @@ class RecipeWidgetRecently extends StatefulWidget {
 }
 
 class _RecipeWidgetRecentlyState extends State<RecipeWidgetRecently> {
-  @override
-  void initState() {
-    Provider.of<RecipesProvider>(context, listen: false)
-        .addRecipeToUserFavourite;
-    super.initState();
-  }
+  // String get recipeId =>recipeId ;
+
+  // @override
+  // void initState() {
+  //   Provider.of<RecipesProvider>(context, listen: false)
+  //       .addRecipeToUserRecentlyViewed(recipeId);
+  //   super.initState();
+  // }
 
   Widget build(BuildContext context) {
     return Padding(
@@ -165,8 +167,8 @@ class _RecipeWidgetRecentlyState extends State<RecipeWidgetRecently> {
                     widget.recipe!.docId!,
                   );
 
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => RecentlyViewedPage()));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (_) => RecentlyViewedPage()));
                 },
                 child: Icon(Icons.close),
               )),
