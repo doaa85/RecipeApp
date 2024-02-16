@@ -8,6 +8,8 @@ class SliderExample extends StatefulWidget {
 }
 
 class _SliderExampleState extends State<SliderExample> {
+  // double get _currentSliderValue => _currentSliderValue;
+  // double get _currentSliderValue => currentSliderValue;
   double _currentSliderValue = 20;
 
   @override

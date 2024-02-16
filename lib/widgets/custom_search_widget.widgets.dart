@@ -10,6 +10,8 @@ class CustomSearchWidget extends StatefulWidget {
 }
 
 class _CustomSearchWidgetState extends State<CustomSearchWidget> {
+  var searchRecipesName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,18 +54,21 @@ class _CustomSearchWidgetState extends State<CustomSearchWidget> {
 
 class CustomSearch extends SearchDelegate {
   var filteredSearchList;
+
   var searchRecipesName = [
     ' Broccoli Chicken Casserole',
     'Chicken, Broccoli, and Cheddar Casserole',
     'Slow Cooker Cheesy Cauliflower Casserole',
-    'Broccoli Cauliflower Casserole'
+    'Broccoli Cauliflower Casserole',
+    "Grandma's Hash Brown Casserole"
   ];
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
           onPressed: () {
-            query = " ";
+            query == " ";
           },
           icon: const Icon(Icons.close))
     ];

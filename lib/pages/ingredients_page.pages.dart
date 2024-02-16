@@ -1,57 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:recipe_app/pages/home_page.pages.dart';
-// import 'package:recipe_app/utilities/numbers.dart';
-
-// class IngredientPage extends StatefulWidget {
-//   const IngredientPage({super.key});
-
-//   @override
-//   State<IngredientPage> createState() => _IngredientPageState();
-// }
-
-// class _IngredientPageState extends State<IngredientPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         leading: const Padding(
-//           padding:
-//               EdgeInsets.symmetric(horizontal: Numbers.appHorizontalPadding),
-//           child: Icon(Icons.menu),
-//         ),
-//         actions: [
-//           Padding(
-//               padding: EdgeInsets.symmetric(
-//                   horizontal: Numbers.appHorizontalPadding),
-//               child:
-//                   // Icon(Icons.logout_sharp),
-//                   IconButton(
-//                 onPressed: () {
-//                   Navigator.push(
-//                       context, MaterialPageRoute(builder: (_) => HomePage()));
-//                 },
-//                 icon: Icon(Icons.logout_sharp),
-//               ))
-//         ],
-//       ),
-//       body: Column(
-//         children: [
-//           Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Row(
-//               children: [
-//                 Text(
-//                   'Ingredients',
-//                   style: TextStyle(fontSize: 24),
-//                 )
-//               ],
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,15 +21,9 @@ class _IngredientPageState extends State<IngredientPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          // leading: TextButton(
-          //   child: Text(
-          //     'Ingredients',
-          //     style: TextStyle(fontSize: 20),
-          //     maxLines: 1,
-          //   ),
-          //   onPressed: () {},
-          // ),
-          ),
+        title: Text("Ingredients"),
+        backgroundColor: Colors.orange,
+      ),
       body: Consumer<IngredientsProvider>(
           builder: (ctx, ingredientProvider, _) =>
               ingredientProvider.ingredientsList == null

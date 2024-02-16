@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexible_grid_view/flexible_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/models/recipes.model.dart';
+import 'package:recipe_app/pages/home_page.pages.dart';
+import 'package:recipe_app/utilities/numbers.dart';
 import 'package:recipe_app/widgets/custom_search_widget.widgets.dart';
 import 'package:recipe_app/widgets/recipe_recently_widget.widgets.dart';
 
@@ -15,14 +17,40 @@ class RecentlyViewedPage extends StatefulWidget {
 }
 
 class _RecentlyViewedPageState extends State<RecentlyViewedPage> {
-  @override
+  var query = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
-      appBar: const PreferredSize(
-          preferredSize: Size.square(60.0), child: CustomSearchWidget()),
-
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: Numbers.appHorizontalPadding),
+          child: InkWell(
+            child: const Icon(
+              Icons.menu,
+              size: 30,
+            ),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomePage()));
+            },
+          ),
+        ),
+        actions: [
+          Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Numbers.appHorizontalPadding),
+              child: IconButton(
+                onPressed: () {
+                  showSearch(context: context, delegate: CustomSearch());
+                },
+                icon: const Icon(
+                  Icons.search,
+                  size: 35,
+                ),
+              ))
+        ],
+      ),
       body: Column(
         children: [
           const Text(
@@ -51,7 +79,7 @@ class _RecentlyViewedPageState extends State<RecentlyViewedPage> {
                               .toList() ??
                           [];
                       return SizedBox(
-                        height: 250,
+                        height: 200,
                         child: Flexible(
                           child: FlexibleGridView(
                             shrinkWrap: true,

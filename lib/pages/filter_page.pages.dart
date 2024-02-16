@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:recipe_app/pages/selected_recipes_page.pages.dart';
 import 'package:recipe_app/provider/recipes_provider.dart';
 import 'package:recipe_app/utilities/colores.dart';
-import 'package:recipe_app/widgets/slider_widget.widgets.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
@@ -15,29 +14,10 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  // get currentSliderValue => currentSliderValue;
   var selectedUserValue = {};
-  double currentSliderValue = 20;
+  double _currentSliderValue = 20;
 
-  // get selectedUserValue => selectedUserValue;
-
-  //  double get currentSliderValue => currentSliderValue();
-
-  // static get selectedUserValue => selectedUserValue;
-  // var value = {
-  //   "type": selectedUserValue,
-  //   "servings":currentSliderValue(),
-  //   "total_time": 20,
-  //   'calories': 447
-  // };
-  // $("#value-slider").slider("value", $("#value-slider").slider("option", "min") );
-// $("#value-slider").empty();
-
-  @override
-  // void initState() {
-  //   Provider.of<RecipesProvider>(context, listen: false).providerDispose();
-  //   super.initState();
-  // }
+  Map get _selectedUserValue => selectedUserValue;
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +38,7 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Provider.of<RecipesProvider>(context, listen: false)
-                    //     .providerDispose();
-                    currentSliderValue == 0.0;
+                    _currentSliderValue = 0.0;
                     selectedUserValue.clear();
                     setState(() {});
                   },
@@ -93,7 +71,6 @@ class _FilterPageState extends State<FilterPage> {
                 children: [
                   InkWell(
                     onTap: () {
-                      var selectedUserValue;
                       selectedUserValue['type'] = "breakfast";
                       setState(() {});
                     },
@@ -151,13 +128,25 @@ class _FilterPageState extends State<FilterPage> {
             child: Row(
               children: [
                 Text(
-                  'Servings',
+                  'servings',
                   style: TextStyle(fontSize: 20),
                 )
               ],
             ),
           ),
-          Container(height: 60, child: SliderExample()),
+          Container(
+              height: 60,
+              child: Slider(
+                value: _currentSliderValue,
+                max: 100,
+                divisions: 5,
+                label: _currentSliderValue.round().toString(),
+                onChanged: (double value) {
+                  setState(() {
+                    _currentSliderValue = value;
+                  });
+                },
+              )),
           const Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -169,19 +158,44 @@ class _FilterPageState extends State<FilterPage> {
               ],
             ),
           ),
-          Container(height: 60, child: SliderExample()),
+          Container(
+              height: 60,
+              child: Slider(
+                value: _currentSliderValue,
+                max: 100,
+                divisions: 5,
+                label: _currentSliderValue.round().toString(),
+                onChanged: (double value) {
+                  setState(() {
+                    _currentSliderValue = value;
+                  });
+                },
+              )),
           const Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Text(
-                  'Calories',
+                  'calories',
                   style: TextStyle(fontSize: 20),
                 )
               ],
             ),
           ),
-          Container(height: 60, child: SliderExample()),
+          Container(
+            height: 60,
+            child: Slider(
+              value: _currentSliderValue,
+              max: 100,
+              divisions: 5,
+              label: _currentSliderValue.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _currentSliderValue = value;
+                });
+              },
+            ),
+          ),
           const SizedBox(
             height: 20,
           ),

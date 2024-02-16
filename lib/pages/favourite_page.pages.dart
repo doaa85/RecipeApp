@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexible_grid_view/flexible_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/models/recipes.model.dart';
-import 'package:recipe_app/widgets/custom_search_widget.widgets.dart';
+import 'package:recipe_app/provider/recipes_provider.dart';
 import 'package:recipe_app/widgets/recipe_widget.widgets.dart';
 
 class FavouritesPage extends StatefulWidget {
@@ -15,16 +16,48 @@ class FavouritesPage extends StatefulWidget {
 
 class _FavouritesPageState extends State<FavouritesPage> {
   @override
+  void initState() {
+    Provider.of<RecipesProvider>(context, listen: false).updateRecipe;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String query = '';
     return Scaffold(
-      appBar: const PreferredSize(
-          preferredSize: Size.square(60.0), child: CustomSearchWidget()),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Text('Favourits', style: TextStyle(fontSize: 24)),
             const SizedBox(
-              height: 30,
+              height: 20,
+            ),
+            Container(
+              height: 35,
+              child: TextFormField(
+                  style: const TextStyle(color: Colors.blue),
+                  decoration: const InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue)),
+                      fillColor: Colors.transparent,
+                      filled: true,
+                      hintStyle: TextStyle(color: Colors.blue),
+                      hintText: 'Search for favourits',
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      )),
+                  onChanged: (value) => setState(() {
+                        query == value;
+                      })),
+            ),
+            SizedBox(
+              height: 10,
             ),
             SizedBox(
               height: 200,
@@ -44,8 +77,13 @@ class _FavouritesPageState extends State<FavouritesPage> {
                         if (snapshots.hasData) {
                           List<Recipe> recipesList = snapshots.data?.docs
                                   .map((e) => Recipe.fromJson(e.data(), e.id))
+                                  .where((recipe) => recipe.title!
+                                      .toUpperCase()
+                                      .contains(query.toUpperCase()))
                                   .toList() ??
                               [];
+                              
+
                           return FlexibleGridView(
                             children: recipesList
                                 .map((e) => RecipeWidget(recipe: e))

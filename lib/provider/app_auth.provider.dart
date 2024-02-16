@@ -12,6 +12,7 @@ class AppAuthProvider extends ChangeNotifier {
   TextEditingController? passwordController;
   TextEditingController? nameController;
   bool obsecureText = true;
+  bool isFavourite = false;
   GlobalKey<FormState>? formKey;
   void providerInit() {
     emailController = TextEditingController();
@@ -26,7 +27,6 @@ class AppAuthProvider extends ChangeNotifier {
     nameController = null;
     formKey = null;
     obsecureText = false;
-    
   }
 
   void openRegisterPage(BuildContext context) {
@@ -37,6 +37,11 @@ class AppAuthProvider extends ChangeNotifier {
 
   void toggleObsecure() {
     obsecureText = !obsecureText;
+    notifyListeners();
+  }
+
+  void toggleIconColor() {
+    isFavourite = !isFavourite;
     notifyListeners();
   }
 
@@ -72,10 +77,8 @@ class AppAuthProvider extends ChangeNotifier {
         }
         OverlayLoadingProgress.stop();
       }
-    } on FirebaseAuthException catch (e) { 
-   
+    } on FirebaseAuthException catch (e) {
       OverlayLoadingProgress.stop();
-      
 
       if (e.code == 'user-not-found') {
         OverlayToastMessage.show(
