@@ -17,8 +17,8 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: Numbers.appHorizontalPadding),
+          padding: const EdgeInsets.symmetric(
+              horizontal: Numbers.appHorizontalPadding),
           child: GestureDetector(
             child: Icon(Icons.menu),
             onTap: () {
@@ -29,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         actions: [
           Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                   horizontal: Numbers.appHorizontalPadding),
               child:
                   // Icon(Icons.logout_sharp),
@@ -45,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       body: Column(
         children: [
-          Padding(
+          const Padding(
             padding: const EdgeInsets.all(12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -57,7 +57,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 70,
           ),
           Padding(
@@ -67,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: ColoresConst.kBlueColor),
-              child: Padding(
+              child: const Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
@@ -106,7 +106,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Row(
                   children: [
                     InkWell(
-                        child: Icon(
+                        child: const Icon(
                           Icons.edit,
                           size: 40,
                         ),
@@ -116,10 +116,10 @@ class _SettingsPageState extends State<SettingsPage> {
                               MaterialPageRoute(
                                   builder: (_) => EditProfilePage()));
                         }),
-                    SizedBox(
+                    const SizedBox(
                       width: 180,
                     ),
-                    Text(
+                    const Text(
                       'Edit Profile',
                       style: TextStyle(fontSize: 18, color: Colors.red),
                     )

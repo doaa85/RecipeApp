@@ -62,44 +62,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                // TextFormField(
-                //   obscureText: authProvider.obsecureText,
-                //   style: const TextStyle(color: Colors.blue),
-                //   controller: authProvider.passwordController,
-                //   decoration: InputDecoration(
-                //       suffixIcon: InkWell(
-                //         onTap: () => authProvider.toggleObsecure(),
-                //         child: authProvider.obsecureText
-                //             ? const Icon(
-                //                 Icons.visibility_off,
-                //                 color: Colors.black,
-                //               )
-                //             : const Icon(
-                //                 Icons.visibility,
-                //                 color: Colors.black,
-                //               ),
-                //       ),
-                //       focusedBorder: const UnderlineInputBorder(
-                //           borderSide: BorderSide(color: Colors.blue)),
-                //       enabledBorder: const UnderlineInputBorder(
-                //           borderSide: BorderSide(color: Colors.blue)),
-                //       border: const UnderlineInputBorder(
-                //           borderSide: BorderSide(color: Colors.white)),
-                //       fillColor: Colors.transparent,
-                //       filled: true,
-                //       hintStyle: const TextStyle(color: Colors.black),
-                //       hintText: 'password',
-                //       prefixIcon: const Icon(
-                //         Icons.password,
-                //         color: Colors.black,
-                //       )),
-                //   validator: (value) {
-                //     if (value == null || (value?.isEmpty ?? false)) {
-                //       return 'Password Is Required';
-                //     }
-                //     return null;
-                //   },
-                // ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -124,25 +86,25 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  Future resetPassword1() async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ));
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailController.text.trim());
-      OverlayLoadingProgress.stop();
-      OverlayToastMessage.show(textMessage: 'Password Reset Email Sent');
-      Navigator.popUntil(context, (route) => route.isFirst);
-    } on FirebaseAuthException catch (e) {
-      print(e);
-      OverlayToastMessage.show(textMessage: e.message);
-      Navigator.of(context).pop();
-    }
-  }
+  // Future resetPassword1() async {
+  //   showDialog(
+  //       context: context,
+  //       barrierDismissible: false,
+  //       builder: (context) => const Center(
+  //             child: CircularProgressIndicator(),
+  //           ));
+  //   try {
+  //     await FirebaseAuth.instance
+  //         .sendPasswordResetEmail(email: emailController.text.trim());
+  //     OverlayLoadingProgress.stop();
+  //     OverlayToastMessage.show(textMessage: 'Password Reset Email Sent');
+  //     Navigator.popUntil(context, (route) => route.isFirst);
+  //   } on FirebaseAuthException catch (e) {
+  //     print(e);
+  //     OverlayToastMessage.show(textMessage: e.message);
+  //     Navigator.of(context).pop();
+  //   }
+  // }
 
   Future<void> resetPassword(String email) async {
     try {

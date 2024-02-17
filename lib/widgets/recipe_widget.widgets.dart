@@ -347,31 +347,16 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                               false));
                   setState(() {});
                 },
-                child:
-                    // IconButton(
-                    //   icon: Icon(
-                    //     Icons.favorite,
-                    //     size: 30,
-                    //     color: isFavourite ? Colors.red : Colors.grey,
-                    //   ),
-                    //   onPressed: () {
-                    //     setState(() {
-                    //       Provider.of<RecipesProvider>(context, listen: false)
-                    //           .toggleIconColor();
-                    //     });
-                    //   },
-                    // ),
-
-                    (widget.recipe?.favourite_users_ids?.contains(
-                                FirebaseAuth.instance.currentUser?.uid) ??
-                            true
-                        ? const Icon(Icons.favorite_border_rounded,
-                            size: 30, color: Colors.red)
-                        : const Icon(
-                            Icons.favorite_rounded,
-                            size: 30,
-                            color: Colors.grey,
-                          ))),
+                child: (widget.recipe?.favourite_users_ids?.contains(
+                            FirebaseAuth.instance.currentUser?.uid) ??
+                        true
+                    ? const Icon(Icons.favorite_border_rounded,
+                        size: 30, color: Colors.red)
+                    : const Icon(
+                        Icons.favorite_rounded,
+                        size: 30,
+                        color: Colors.grey,
+                      ))),
           ),
         ],
       ),

@@ -170,10 +170,6 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (_) => const RegisterPage()));
                           Provider.of<AppAuthProvider>(context, listen: false)
                               .openRegisterPage(context);
                         },

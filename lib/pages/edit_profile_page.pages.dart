@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/provider/app_auth.provider.dart';
@@ -62,12 +63,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     TextField(
                       controller: authProvider.nameController,
                       onChanged: (value) {
-                        String value = nameController.text;
+                        value = nameController.text;
+                        setState(() {
+                          FirebaseAuth.instance.currentUser?.displayName !=
+                              value;
+                        });
 
                         print(value);
                         nameController.clear();
                       },
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                       decoration: const InputDecoration(
                           border: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black)),

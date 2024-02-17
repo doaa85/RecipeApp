@@ -74,28 +74,28 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 10,
                   ),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     controller: authProvider.passwordController,
                     obscureText: authProvider.obsecureText,
                     decoration: InputDecoration(
-                        border: UnderlineInputBorder(
+                        border: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         fillColor: Colors.transparent,
                         filled: true,
-                        hintStyle: TextStyle(color: Colors.white),
+                        hintStyle: const TextStyle(color: Colors.white),
                         hintText: 'password',
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.password,
                           color: Colors.white,
                         ),
                         suffixIcon: InkWell(
                           onTap: () => authProvider.toggleObsecure(),
                           child: authProvider.obsecureText
-                              ? Icon(
+                              ? const Icon(
                                   Icons.visibility_off,
                                   color: Colors.white,
                                 )
-                              : Icon(
+                              : const Icon(
                                   Icons.visibility,
                                   color: Colors.white,
                                 ),
@@ -105,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 10,
                   ),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     controller: authProvider.nameController,
                     decoration: const InputDecoration(
                         border: UnderlineInputBorder(
@@ -129,9 +129,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () {
                         authProvider.signUp(context);
                       },
-                      child: Text('register',
+                      child: const Text('register',
                           style: TextStyle(color: Colors.white))),
-                  Spacer(
+                  const Spacer(
                     flex: 2,
                   ),
                   Padding(

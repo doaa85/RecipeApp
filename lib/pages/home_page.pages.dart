@@ -66,9 +66,6 @@ class _HomePageState extends State<HomePage> {
                 CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.white,
-                  // child: CircleAvatar(
-                  //   radius: 50,
-                  // ),
                   backgroundImage: NetworkImage(FirebaseAuth
                           .instance.currentUser!.photoURL ??
                       'https://firebasestorage.googleapis.com/v0/b/recipe-app-6d083.appspot.com/o/reciepes%2FIMG_%D9%A2%D9%A0%D9%A2%D9%A3%D9%A0%D9%A6%D9%A2%D9%A3_%D9%A2%D9%A3%D9%A0%D9%A7%D9%A3%D9%A4.jpg?alt=media&token=c0478655-9e3d-44c1-878d-f48fc2b6dec2'),
@@ -84,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   // TextStyle
                 ),
-              const  SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 ListTile(
@@ -169,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                       Provider.of<AppAuthProvider>(context, listen: false)
                           .signOut(context);
                     },
-                    child: Text(
+                    child: const Text(
                       'SignOut',
                       style: TextStyle(color: Colors.black),
                     ))
@@ -179,7 +176,7 @@ class _HomePageState extends State<HomePage> {
             body: Container(
               margin: const EdgeInsets.only(top: 0, left: 20, right: 20),
               child: Column(children: [
-                SizedBox(
+                const SizedBox(
                   height: 15,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -191,15 +188,15 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Container(
                   height: 25,
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'What Would you Like to coock today?',
                         style: TextStyle(
                             fontSize: 16,
@@ -228,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               color: ColoresConst.kprimaryColor,
                               borderRadius: BorderRadius.circular(12)),
-                          child: Icon(
+                          child: const Icon(
                             Icons.search,
                             size: 20,
                           ),
@@ -252,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               color: ColoresConst.kprimaryColor,
                               borderRadius: BorderRadius.circular(12)),
-                          child: Icon(
+                          child: const Icon(
                             Icons.tune,
                             size: 18,
                           ),
@@ -261,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 2,
                 ),
                 AdsWidget(),

@@ -15,7 +15,7 @@ class _EnterPageState extends State<EnterPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Image(
+          const Image(
             image: AssetImage(
               'assets/images/Mask Group 9.png',
             ),
@@ -24,12 +24,12 @@ class _EnterPageState extends State<EnterPage> {
             width: double.infinity,
             height: double.infinity,
           ),
-          SizedBox(
+          const SizedBox(
             height: 100,
           ),
           Container(
             padding: EdgeInsets.fromLTRB(85, 155, 50, 0),
-            child: Image(
+            child: const Image(
               image: AssetImage('assets/images/Logo (2).png'),
               color: Colors.black12,
               colorBlendMode: BlendMode.darken,
@@ -37,7 +37,7 @@ class _EnterPageState extends State<EnterPage> {
               height: 200,
             ),
           ),
-          Column(
+          const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
@@ -83,7 +83,7 @@ class _EnterPageState extends State<EnterPage> {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (_) => LoginPage()));
                     },
-                    child: Text(
+                    child: const Text(
                       'Sign in',
                       style: TextStyle(color: Colors.white),
                     ),

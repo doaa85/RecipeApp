@@ -52,7 +52,7 @@ class _CustomCardState extends State<CustomCard> {
                   ),
                   Column(
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             'Breakfast',
@@ -69,7 +69,7 @@ class _CustomCardState extends State<CustomCard> {
                               freshList[index]['name'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400),
@@ -77,7 +77,7 @@ class _CustomCardState extends State<CustomCard> {
                           ],
                         ),
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.star,
@@ -97,7 +97,7 @@ class _CustomCardState extends State<CustomCard> {
                           )
                         ],
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(vertical: 8),
                         child: Row(
                           children: [
@@ -118,7 +118,7 @@ class _CustomCardState extends State<CustomCard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.access_time,

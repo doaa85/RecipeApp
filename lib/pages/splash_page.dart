@@ -57,7 +57,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: Stack(
           children: [
-            Image(
+         const   Image(
               image: AssetImage(
                 'assets/images/Mask Group 9.png',
               ),
@@ -66,12 +66,12 @@ class _SplashPageState extends State<SplashPage> {
               width: double.infinity,
               height: double.infinity,
             ),
-            SizedBox(
+          const  SizedBox(
               height: 100,
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(85, 130, 0, 0),
-              child: Image(
+              padding:const EdgeInsets.fromLTRB(85, 130, 0, 0),
+              child: const Image(
                 image: AssetImage('assets/images/Logo (2).png'),
                 color: Colors.black12,
                 colorBlendMode: BlendMode.darken,
@@ -79,7 +79,7 @@ class _SplashPageState extends State<SplashPage> {
                 height: 200,
               ),
             ),
-            Column(
+          const  Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
@@ -95,7 +95,7 @@ class _SplashPageState extends State<SplashPage> {
                 )
               ],
             ),
-            CircularProgressIndicator(),
+          const  CircularProgressIndicator(),
           ],
         ),
       ),

@@ -170,12 +170,6 @@ class AppAuthProvider extends ChangeNotifier {
           FirebaseAuth.instance.currentUser?.updatePhotoURL(
               'https://firebasestorage.googleapis.com/v0/b/recipe-app-6d083.appspot.com/o/reciepes%2FIMG_%D9%A2%D9%A0%D9%A2%D9%A3%D9%A0%D9%A6%D9%A2%D9%A3_%D9%A2%D9%A3%D9%A0%D9%A7%D9%A3%D9%A4.jpg?alt=media&token=c0478655-9e3d-44c1-878d-f48fc2b6dec2');
           OverlayLoadingProgress.stop();
-          // providerDispose();
-
-          // if (context.mounted) {
-          //   Navigator.pushReplacement(
-          //       context, MaterialPageRoute(builder: (_) => SettingsPage()));
-          // }
         }
         OverlayLoadingProgress.stop();
       }
@@ -183,7 +177,8 @@ class AppAuthProvider extends ChangeNotifier {
       OverlayLoadingProgress.stop();
     }
   }
-   Future<void> updateUserName(BuildContext context, String newName) async {
+
+  Future<void> updateUserName(BuildContext context, String newName) async {
     try {
       OverlayLoadingProgress.start();
       User? currentUser = FirebaseAuth.instance.currentUser;
@@ -205,6 +200,7 @@ class AppAuthProvider extends ChangeNotifier {
       );
     }
   }
+
   Future<void> updateUserImage(BuildContext context) async {
     try {
       OverlayLoadingProgress.start();

@@ -19,12 +19,9 @@ class _FilterPageState extends State<FilterPage> {
 
   Map get _selectedUserValue => selectedUserValue;
 
-  // double get _currentSliderValue => _currentSliderValue;
 
   @override
   Widget build(BuildContext context) {
-    // double _currentSliderValue2 = 10;
-    // double _currentSliderValue3 = 5;
     return Scaffold(
       appBar: AppBar(),
       body: Column(
