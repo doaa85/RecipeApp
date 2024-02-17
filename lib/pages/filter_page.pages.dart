@@ -15,12 +15,16 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> {
   var selectedUserValue = {};
-  double _currentSliderValue = 20;
+  double _currentSliderValue = 10;
 
   Map get _selectedUserValue => selectedUserValue;
 
+  // double get _currentSliderValue => _currentSliderValue;
+
   @override
   Widget build(BuildContext context) {
+    // double _currentSliderValue2 = 10;
+    // double _currentSliderValue3 = 5;
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -38,7 +42,7 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    _currentSliderValue = 0.0;
+                    _currentSliderValue = 0;
                     selectedUserValue.clear();
                     setState(() {});
                   },
@@ -152,7 +156,7 @@ class _FilterPageState extends State<FilterPage> {
             child: Row(
               children: [
                 Text(
-                  'Total time',
+                  'total time',
                   style: TextStyle(fontSize: 20),
                 )
               ],

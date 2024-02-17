@@ -21,7 +21,7 @@ class _AllRecipesPageState extends State<AllRecipesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(title: Text('All Recipes')),
         body: Consumer<RecipesProvider>(
             builder: (ctx, recipesProvider, _) =>
                 recipesProvider.recipesList == null

@@ -15,9 +15,17 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
+  late bool isAdd;
+  late String recipeId;
+
   @override
   void initState() {
     Provider.of<RecipesProvider>(context, listen: false).updateRecipe;
+
+    // Provider.of<RecipesProvider>(context, listen: false)
+    //     .addRecipeToUserFavourite(recipeId, isAdd);
+    Provider.of<RecipesProvider>(context, listen: false).getRecipes();
+
     super.initState();
   }
 
@@ -52,11 +60,13 @@ class _FavouritesPageState extends State<FavouritesPage> {
                         Icons.search,
                         color: Colors.grey,
                       )),
-                  onChanged: (value) => setState(() {
-                        query == value;
-                      })),
+                  onChanged: (value) {
+                    setState(() {
+                      query == value;
+                    });
+                  }),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SizedBox(
@@ -78,11 +88,10 @@ class _FavouritesPageState extends State<FavouritesPage> {
                           List<Recipe> recipesList = snapshots.data?.docs
                                   .map((e) => Recipe.fromJson(e.data(), e.id))
                                   .where((recipe) => recipe.title!
-                                      .toUpperCase()
-                                      .contains(query.toUpperCase()))
+                                      .toLowerCase()
+                                      .contains(query.toLowerCase()))
                                   .toList() ??
                               [];
-                              
 
                           return FlexibleGridView(
                             children: recipesList

@@ -228,7 +228,7 @@ class RecipesProvider extends ChangeNotifier {
   List<Recipe>? get filteredRecipesList => _filteredRecipesList;
 
   get currentSliderValue => currentSliderValue;
-  bool isFavourite = false;
+
 
   Function get updateRecipe => _updateRecipe;
 
@@ -256,10 +256,7 @@ class RecipesProvider extends ChangeNotifier {
     }
   }
 
-  void toggleIconColor() {
-    isFavourite = !isFavourite;
-    notifyListeners();
-  }
+ 
 
   void providerDispose() {
     var selectedUserValue;

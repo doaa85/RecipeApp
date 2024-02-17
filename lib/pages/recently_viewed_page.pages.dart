@@ -79,19 +79,33 @@ class _RecentlyViewedPageState extends State<RecentlyViewedPage> {
                               .toList() ??
                           [];
                       return SizedBox(
-                        height: 200,
-                        child: Flexible(
-                          child: FlexibleGridView(
-                            shrinkWrap: true,
-                            children: recipesList
-                                .map((e) => RecipeWidgetRecently(recipe: e))
-                                .toList(),
-                            axisCount: GridLayoutEnum.twoElementsInRow,
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 8,
-                          ),
-                        ),
-                      );
+                          height: 200,
+                          child: Flexible(
+                            child: FlexibleGridView(
+                              shrinkWrap: true,
+                              children: recipesList
+                                  .map((e) => RecipeWidgetRecently(recipe: e))
+                                  .toList(),
+                              axisCount: GridLayoutEnum.twoElementsInRow,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                            ),
+                            // ListView.builder(
+                            //     itemCount: recipesList.length,
+                            //     itemBuilder: (context, Index) => SizedBox(
+                            //           height: 200,
+                            //           width: 300,
+                            //           child: Column(
+                            //               children: recipesList
+                            //                   .map((e) => SizedBox(
+                            //                       height: 100,
+                            //                       width: 60,
+                            //                       child:
+                            //                           RecipeWidgetRecently(
+                            //                               recipe: e)))
+                            //                   .toList()),
+                            //         ))),
+                          ));
                     } else {
                       return const Text('No Data Found');
                     }

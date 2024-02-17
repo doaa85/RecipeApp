@@ -64,29 +64,27 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.white,
-                    // child: CircleAvatar(
-                    //   radius: 50,
-                    // ),
-                    backgroundImage: NetworkImage
-                    //("  ${refresnce.getDownloadURL}")
-
-                    ('https://firebasestorage.googleapis.com/v0/b/recipe-app-6d083.appspot.com/o/reciepes%2FIMG_%D9%A2%D9%A0%D9%A2%D9%A3%D9%A0%D9%A6%D9%A2%D9%A3_%D9%A2%D9%A3%D9%A0%D9%A7%D9%A3%D9%A4.jpg?alt=media&token=c0478655-9e3d-44c1-878d-f48fc2b6dec2'),
-                    ), // circleAvatar
+                  radius: 60,
+                  backgroundColor: Colors.white,
+                  // child: CircleAvatar(
+                  //   radius: 50,
+                  // ),
+                  backgroundImage: NetworkImage(FirebaseAuth
+                          .instance.currentUser!.photoURL ??
+                      'https://firebasestorage.googleapis.com/v0/b/recipe-app-6d083.appspot.com/o/reciepes%2FIMG_%D9%A2%D9%A0%D9%A2%D9%A3%D9%A0%D9%A6%D9%A2%D9%A3_%D9%A2%D9%A3%D9%A0%D9%A7%D9%A3%D9%A4.jpg?alt=media&token=c0478655-9e3d-44c1-878d-f48fc2b6dec2'),
+                ), // circleAvatar
                 // circleAvatar
                 Text(
-                  // 'salma'
-                  FirebaseAuth.instance.currentUser!.displayName!,
+                  FirebaseAuth.instance.currentUser!.displayName ?? 'No name',
 
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 22,
                     fontFamily: 'Hellix-Bold',
                   ),
                   // TextStyle
                 ),
-                SizedBox(
+              const  SizedBox(
                   height: 100,
                 ),
                 ListTile(

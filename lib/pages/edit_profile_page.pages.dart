@@ -1,8 +1,5 @@
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:overlay_kit/overlay_kit.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/provider/app_auth.provider.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -19,65 +16,95 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-          child: Column(
-        children: [
-          ElevatedButton(
-              onPressed: () async {
-                OverlayLoadingProgress.start();
+    return Consumer<AppAuthProvider>(
+        builder: ((context, authProvider, child) => Scaffold(
+              appBar: AppBar(
+                title: Text('Edit Profile'),
+              ),
+              body: Center(
+                  child: Form(
+                key: authProvider.formKey,
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Provider.of<AppAuthProvider>(context, listen: false)
+                              .updateUserImage(context);
+                        }
 
-                var imageResult = await FilePicker.platform
-                    .pickFiles(type: FileType.image, withData: true);
+                        //  () async {
+                        //   OverlayLoadingProgress.start();
 
-                var refresnce = FirebaseStorage.instance
-                    .ref('reciepes/${imageResult?.files.first.name}');
+                        //   var imageResult = await FilePicker.platform
+                        //       .pickFiles(type: FileType.image, withData: true);
 
-                if (imageResult?.files.first.bytes != null) {
-                  var uploadResult = await refresnce.putData(
-                      imageResult!.files.first.bytes!,
-                      SettableMetadata(contentType: 'image/png'));
+                        //   var refresnce = FirebaseStorage.instance
+                        //       .ref('reciepes/${imageResult?.files.first.name}');
 
-                  if (uploadResult.state == TaskState.success) {
-                    print(
-                        '?????image upload successfully ${await refresnce.getDownloadURL()}');
-                  }
-                }
+                        //   if (imageResult?.files.first.bytes != null) {
+                        //     var uploadResult = await refresnce.putData(
+                        //         imageResult!.files.first.bytes!,
+                        //         SettableMetadata(contentType: 'image/png'));
 
-                OverlayLoadingProgress.stop();
-              },
-              child: const Text('upload image')),
-          SizedBox(
-            height: 20,
-          ),
-          TextFormField(
-            onFieldSubmitted: (value) async {
-              if (nameController.text.isNotEmpty) {
-                // String value = nameController.text;
-                await FirebaseAuth.instance.currentUser
-                    ?.updateDisplayName(nameController.text);
+                        //     if (uploadResult.state == TaskState.success) {
+                        //       print(
+                        //           '?????image upload successfully ${await refresnce.getDownloadURL()}');
+                        //     }
+                        //   }
 
-                nameController.clear();
-              }
-              Navigator.of(context).pop();
-            },
-            style: TextStyle(color: Colors.black),
-            controller: AppAuthProvider().nameController,
-            decoration: const InputDecoration(
-                border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
-                fillColor: Colors.transparent,
-                filled: true,
-                hintStyle: TextStyle(color: Colors.black),
-                hintText: 'Enter name',
-                prefixIcon: Icon(
-                  Icons.document_scanner,
-                  color: Colors.white,
-                )),
-          )
-        ],
-      )),
-    );
+                        //   OverlayLoadingProgress.stop();
+                        // },
+                        ,
+                        child: const Text('upload image')),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      controller: authProvider.nameController,
+                      onChanged: (value) {
+                        String value = nameController.text;
+
+                        print(value);
+                        nameController.clear();
+                      },
+                      style: TextStyle(color: Colors.black),
+                      decoration: const InputDecoration(
+                          border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          fillColor: Colors.transparent,
+                          filled: true,
+                          hintStyle: TextStyle(color: Colors.black),
+                          hintText: 'Enter name',
+                          prefixIcon: Icon(
+                            Icons.document_scanner,
+                            color: Colors.white,
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Provider.of<AppAuthProvider>(context, listen: false)
+                              .updateUserName(context, nameController.text);
+                          Navigator.of(context).pop();
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'Edit',
+                                style:
+                                    TextStyle(fontSize: 24, color: Colors.blue),
+                              ),
+                            ],
+                          ),
+                        ))
+                  ],
+                ),
+              )),
+            )));
   }
 }

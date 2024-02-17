@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:overlay_kit/overlay_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/provider/app_auth.provider.dart';
+import 'package:recipe_app/utilities/toast_messege_status.utils.dart';
+import 'package:recipe_app/widgets/toast_messege_widget.widgets.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -106,7 +108,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         backgroundColor: Colors.white30,
                         minimumSize: const Size.fromHeight(50)),
                     onPressed: () {
-                      resetPassword();
+                      // resetPassword();
+                      resetPassword(emailController.text);
                     },
                     icon: const Icon(Icons.email_outlined),
                     label: const Text(
@@ -121,7 +124,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  Future resetPassword() async {
+  Future resetPassword1() async {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -138,6 +141,25 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       print(e);
       OverlayToastMessage.show(textMessage: e.message);
       Navigator.of(context).pop();
+    }
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      OverlayToastMessage.show(
+        widget: const ToastMessageWidget(
+          message: 'Password reset email sent. Check your email inbox.',
+          toastMessageStatus: ToastMessageStatus.success,
+        ),
+      );
+    } catch (e) {
+      OverlayToastMessage.show(
+        widget: const ToastMessageWidget(
+          message: 'Failed to send password reset email. Please try again.',
+          toastMessageStatus: ToastMessageStatus.failed,
+        ),
+      );
     }
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/models/recipes.model.dart';
-import 'package:recipe_app/pages/recently_viewed_page.pages.dart';
+
 import 'package:recipe_app/pages/recipe_detailes_page.pages.dart';
 import 'package:recipe_app/provider/recipes_provider.dart';
 import 'package:recipe_app/utilities/colores.dart';

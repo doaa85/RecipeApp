@@ -336,8 +336,8 @@ class _RecipeWidgetState extends State<RecipeWidget> {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: InkWell(
+            padding: const EdgeInsets.all(16.0),
+            child: InkWell(
                 onTap: () {
                   Provider.of<RecipesProvider>(context, listen: false)
                       .addRecipeToUserFavourite(
@@ -347,34 +347,32 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                               false));
                   setState(() {});
                 },
-                child: IconButton(
-                  icon: Icon(
-                    Icons.favorite,
-                    size: 30,
-                    color: isFavourite ? Colors.red : Colors.grey,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      Provider.of<RecipesProvider>(context, listen: false)
-                          .toggleIconColor();
-                    });
-                  },
-                ),
+                child:
+                    // IconButton(
+                    //   icon: Icon(
+                    //     Icons.favorite,
+                    //     size: 30,
+                    //     color: isFavourite ? Colors.red : Colors.grey,
+                    //   ),
+                    //   onPressed: () {
+                    //     setState(() {
+                    //       Provider.of<RecipesProvider>(context, listen: false)
+                    //           .toggleIconColor();
+                    //     });
+                    //   },
+                    // ),
 
-                // (widget.recipe?.favourite_users_ids?.contains(
-                //             FirebaseAuth.instance.currentUser?.uid) ??
-                //         true
-                //     ? const Icon(
-                //         Icons.favorite_border_rounded,
-                //         size: 30,
-                //         color: Colors.red
-                //       )
-                //     : const Icon(
-                //         Icons.favorite_rounded,
-                //         size: 30,
-                //         color: Colors.grey,
-                //       ))),
-              )),
+                    (widget.recipe?.favourite_users_ids?.contains(
+                                FirebaseAuth.instance.currentUser?.uid) ??
+                            true
+                        ? const Icon(Icons.favorite_border_rounded,
+                            size: 30, color: Colors.red)
+                        : const Icon(
+                            Icons.favorite_rounded,
+                            size: 30,
+                            color: Colors.grey,
+                          ))),
+          ),
         ],
       ),
     );
